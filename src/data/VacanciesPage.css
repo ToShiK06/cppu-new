@@ -1,0 +1,73 @@
+.vacancy {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  margin-bottom: 24px;
+}
+.vacancy__title {
+  font-size: 24px;
+  margin-bottom: 24px;
+}
+.vacancy__cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-bottom: 24px;
+}
+.vacancy__cols h4 {
+  font-size: 15px;
+  margin-bottom: 12px;
+  color: var(--accent);
+}
+.vacancy__cols li {
+  color: var(--muted);
+  font-size: 14px;
+  padding: 4px 0 4px 20px;
+  position: relative;
+}
+.vacancy__cols li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.vacancy__contacts {
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+  font-size: 15px;
+  color: var(--muted);
+}
+.vacancy__contacts a {
+  color: var(--accent);
+}
+.vacancy-form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 40px;
+}
+.vacancy-form h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.vacancy-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+@media (max-width: 900px) {
+  .vacancy__cols {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}

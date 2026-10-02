@@ -1,0 +1,23 @@
+.contacts-page__info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
+  margin-bottom: 48px;
+}
+.contacts-page__col h4 {
+  font-size: 14px;
+  color: var(--accent);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.contacts-page__col p,
+.contacts-page__col a {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+.contacts-page__muted {
+  color: var(--muted);
+  font-size: 14px;
+}

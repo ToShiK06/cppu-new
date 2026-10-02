@@ -1,0 +1,16 @@
+.contacts { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.contacts__item { margin-bottom: 28px; }
+.contacts__label {
+  display: block; font-size: 12px; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;
+}
+.contacts__item p, .contacts__item a { display: block; font-size: 17px; margin-bottom: 4px; }
+.contacts__form {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 32px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.contacts__form h3 { font-size: 20px; margin-bottom: 8px; }
+@media (max-width: 900px) {
+  .contacts { grid-template-columns: 1fr; gap: 32px; }
+}

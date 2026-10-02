@@ -1,0 +1,13 @@
+.promo {
+  background: linear-gradient(160deg, var(--surface), var(--surface-2));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  position: relative;
+}
+.promo__highlight {
+  display: inline-block; padding: 6px 14px; background: var(--accent);
+  color: #fff; border-radius: 100px; font-weight: 700; font-size: 13px; margin-bottom: 16px;
+}
+.promo h3 { font-size: 20px; margin-bottom: 10px; }
+.promo p { color: var(--muted); font-size: 15px; }

@@ -1,0 +1,9 @@
+.work {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px;
+  transition: all .25s ease;
+}
+.work:hover { border-color: var(--accent-2); transform: translateY(-4px); }
+.work__year { font-size: 12px; color: var(--accent-2); letter-spacing: 1px; margin-bottom: 12px; }
+.work h3 { font-size: 18px; margin-bottom: 8px; }
+.work p { color: var(--muted); font-size: 14px; }
