@@ -129,3 +129,34 @@
   border-color: #f85149;
   color: #f85149;
 }
+.admin__filters {
+  display: grid;
+  grid-template-columns: 2fr 1fr auto;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.admin-card__tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 8px 0;
+}
+.admin-card__status {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 12px;
+}
+.admin-card__status.status--new {
+  background: rgba(255, 90, 31, 0.15);
+  color: var(--accent);
+}
+.admin-card__status.status--processed {
+  background: rgba(63, 185, 80, 0.15);
+  color: var(--success);
+}
+@media (max-width: 700px) {
+  .admin__filters {
+    grid-template-columns: 1fr;
+  }
+}

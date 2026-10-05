@@ -14,13 +14,19 @@ export default function Advantages() {
   return (
     <section className="section" id="advantages">
       <div className="container">
-        <SectionTitle
-          title="Почему выбирают нас"
-          subtitle="Преимущества работы с Центром противопожарных услуг"
-        />
+        <div className="reveal">
+          <SectionTitle
+            title="Почему выбирают нас"
+            subtitle="Преимущества работы с Центром противопожарных услуг"
+          />
+        </div>
         <div className="grid">
           {items.map((it, i) => (
-            <div key={it.title} className="advantage">
+            <div
+              key={it.title}
+              className="advantage reveal-scale"
+              style={{ transitionDelay: `${i * 70}ms` }}
+            >
               <div className="advantage__num">{String(i + 1).padStart(2, "0")}</div>
               <h3>{it.title}</h3>
               <p>{it.text}</p>

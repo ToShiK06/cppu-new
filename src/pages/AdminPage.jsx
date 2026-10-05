@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { login, logout } from "../services/auth";
 import {
@@ -11,6 +11,7 @@ import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 import Loader from "../components/ui/Loader";
 import { formatDate } from "../utils/helpers";
+import { exportToCSV } from "../utils/csv";
 import "./AdminPage.css";
 
 export default function AdminPage() {
@@ -22,6 +23,8 @@ export default function AdminPage() {
   const [leads, setLeads] = useState([]);
   const [training, setTraining] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
 
   useEffect(() => {
     if (!user) {
@@ -44,15 +47,48 @@ export default function AdminPage() {
     setError("");
     try {
       await login(email, password);
-    } catch (err) {
+    } catch {
       setError("Неверный логин или пароль");
     }
+  };
+
+  const data = tab === "leads" ? leads : training;
+
+  const filtered = useMemo(() => {
+    return data.filter((item) => {
+      const q = search.trim().toLowerCase();
+      const matchSearch =
+        !q ||
+        (item.name || "").toLowerCase().includes(q) ||
+        (item.phone || "").toLowerCase().includes(q) ||
+        (item.message || "").toLowerCase().includes(q) ||
+        (item.email || "").toLowerCase().includes(q);
+
+      const status = item.status || "new";
+      const matchStatus = statusFilter === "all" || status === statusFilter;
+
+      return matchSearch && matchStatus;
+    });
+  }, [data, search, statusFilter]);
+
+  const handleExport = () => {
+    const columns = [
+      { label: "Имя", value: "name" },
+      { label: "Телефон", value: "phone" },
+      { label: "Email", value: "email" },
+      { label: "Сообщение", value: "message" },
+      { label: "Тип", value: "type" },
+      { label: "Статус", value: (r) => r.status || "new" },
+      { label: "Дата", value: (r) => formatDate(r.createdAt) },
+    ];
+    const filename = tab === "leads" ? "leads.csv" : "training.csv";
+    exportToCSV(filtered, columns, filename);
   };
 
   if (!user) {
     return (
       <section className="section">
-        <div className="container admin-login">
+        <div className="container admin-login animate-up">
           <h1>Вход в админ-панель</h1>
           <form onSubmit={handleLogin} className="admin-login__form">
             <Input
@@ -77,12 +113,10 @@ export default function AdminPage() {
     );
   }
 
-  const data = tab === "leads" ? leads : training;
-
   return (
     <section className="section">
       <div className="container admin">
-        <div className="admin__header">
+        <div className="admin__header animate-down">
           <h1>Админ-панель</h1>
           <div>
             <span className="admin__user">{user.email}</span>
@@ -90,7 +124,7 @@ export default function AdminPage() {
           </div>
         </div>
 
-        <div className="admin__tabs">
+        <div className="admin__tabs animate-up">
           <button
             className={tab === "leads" ? "is-active" : ""}
             onClick={() => setTab("leads")}
@@ -105,18 +139,51 @@ export default function AdminPage() {
           </button>
         </div>
 
+        <div className="admin__filters animate-up delay-1">
+          <input
+            className="input"
+            placeholder="Поиск по имени, телефону, тексту..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <select
+            className="input"
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+          >
+            <option value="all">Все статусы</option>
+            <option value="new">Новые</option>
+            <option value="processed">Обработанные</option>
+          </select>
+          <Button variant="ghost" onClick={handleExport}>
+            Экспорт CSV
+          </Button>
+        </div>
+
         {loading && <Loader />}
-        {!loading && data.length === 0 && <p className="admin__empty">Пока нет записей.</p>}
+        {!loading && filtered.length === 0 && (
+          <p className="admin__empty animate-up">Ничего не найдено.</p>
+        )}
 
         <div className="admin__list">
-          {data.map((item) => (
-            <div key={item.id} className="admin-card">
+          {filtered.map((item, i) => (
+            <div
+              key={item.id}
+              className="admin-card animate-up"
+              style={{ animationDelay: `${Math.min(i * 40, 400)}ms` }}
+            >
               <div className="admin-card__row">
                 <strong>{item.name || "—"}</strong>
                 <span>{item.phone || "—"}</span>
               </div>
+              {item.email && <p className="admin-card__msg">Email: {item.email}</p>}
               {item.message && <p className="admin-card__msg">{item.message}</p>}
-              {item.type && <span className="admin-card__tag">{item.type}</span>}
+              <div className="admin-card__tags">
+                {item.type && <span className="admin-card__tag">{item.type}</span>}
+                <span className={`admin-card__status status--${item.status || "new"}`}>
+                  {item.status === "processed" ? "Обработано" : "Новое"}
+                </span>
+              </div>
               <div className="admin-card__footer">
                 <span className="admin-card__date">{formatDate(item.createdAt)}</span>
                 {tab === "leads" && (

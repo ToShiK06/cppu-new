@@ -1,9 +1,105 @@
-.services-filter { margin-bottom: 40px; display: flex; flex-direction: column; gap: 20px; }
-.services-cats { display: flex; gap: 8px; flex-wrap: wrap; }
-.cat-chip {
-  padding: 8px 16px; border: 1px solid var(--border); border-radius: 100px;
-  font-size: 14px; color: var(--muted); transition: all .2s;
+.services-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 48px 0 96px;
+  /* Фон задаётся через style={{ backgroundImage }} в JSX */
+  background-size: 60% auto;      /* фото 60% ширины блока, не растягивается на весь экран */
+  background-position: center top; /* по центру сверху */
+  background-repeat: no-repeat;
+  /* никакого background-attachment: fixed — фон скроллится вместе с контентом */
 }
-.cat-chip:hover { border-color: var(--accent); color: var(--text); }
-.cat-chip.is-active { background: var(--accent); color: #fff; border-color: var(--accent); }
-.services-empty { text-align: center; color: var(--muted); padding: 40px 0; }
+
+/* Затемнение только поверх верхней части, где фото */
+.services-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(13, 17, 23, 0.85) 0%,
+    rgba(13, 17, 23, 0.75) 40%,
+    rgba(13, 17, 23, 0.95) 100%
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+.services-page__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.services-page .service-card {
+  background: rgba(22, 27, 34, 0.9);
+  backdrop-filter: blur(6px);
+}
+
+.services-page .service-card:hover {
+  background: rgba(22, 27, 34, 0.98);
+}
+
+.services-filter {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.services-filter .input {
+  background: rgba(13, 17, 23, 0.9);
+  backdrop-filter: blur(6px);
+  max-width: 480px;
+}
+
+.services-cats {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cat-chip {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 14px;
+  color: var(--muted);
+  transition: all .2s;
+  background: rgba(13, 17, 23, 0.7);
+  backdrop-filter: blur(6px);
+}
+.cat-chip:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+.cat-chip.is-active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.services-empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 40px 0;
+}
+
+@media (max-width: 900px) {
+  .services-page {
+    background-size: 90% auto;   /* на мобильном фото почти во всю ширину */
+    background-position: center top;
+    padding: 32px 0 64px;
+  }
+}
+.services-more {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 48px;
+}
+
+.services-more__counter {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.3px;
+}

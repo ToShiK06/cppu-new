@@ -42,8 +42,10 @@ export default function ReviewsPage() {
   return (
     <section className="section">
       <div className="container">
-        <Breadcrumbs items={[{ label: "Главная", to: "/" }, { label: "Отзывы" }]} />
-        <SectionTitle title="Отзывы" subtitle="Что говорят о нас клиенты" />
+        <div className="reveal">
+          <Breadcrumbs items={[{ label: "Главная", to: "/" }, { label: "Отзывы" }]} />
+          <SectionTitle title="Отзывы" subtitle="Что говорят о нас клиенты" />
+        </div>
 
         {loading && <Loader />}
 
@@ -53,8 +55,12 @@ export default function ReviewsPage() {
 
         {!loading && reviews.length > 0 && (
           <div className="grid">
-            {reviews.map((r) => (
-              <div key={r.id} className="review">
+            {reviews.map((r, i) => (
+              <div
+                key={r.id}
+                className="review reveal-scale"
+                style={{ transitionDelay: `${(i % 6) * 60}ms` }}
+              >
                 <p className="review__text">«{r.text}»</p>
                 <span className="review__author">{r.author}</span>
               </div>
@@ -62,7 +68,7 @@ export default function ReviewsPage() {
           </div>
         )}
 
-        <div className="reviews__form-wrap">
+        <div className="reviews__form-wrap reveal">
           <h3>Оставить отзыв</h3>
           <form onSubmit={handleSubmit} className="reviews__form">
             <Input

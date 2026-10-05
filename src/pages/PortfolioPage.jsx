@@ -16,11 +16,13 @@ export default function PortfolioPage() {
   return (
     <section className="section">
       <div className="container">
-        <Breadcrumbs items={[{ label: "Главная", to: "/" }, { label: "Наши работы" }]} />
-        <SectionTitle
-          title="Наши работы"
-          subtitle="Объекты, на которых мы выполняли работы по пожарной безопасности"
-        />
+        <div className="reveal">
+          <Breadcrumbs items={[{ label: "Главная", to: "/" }, { label: "Наши работы" }]} />
+          <SectionTitle
+            title="Наши работы"
+            subtitle="Объекты, на которых мы выполняли работы по пожарной безопасности"
+          />
+        </div>
       </div>
       <Portfolio />
     </section>

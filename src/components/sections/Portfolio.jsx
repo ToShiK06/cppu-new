@@ -15,10 +15,16 @@ export default function Portfolio({ limit }) {
   return (
     <section className="section" id="portfolio">
       <div className="container">
-        <SectionTitle title="Выполненные работы" subtitle="Объекты, на которых мы работали" />
+        <div className="reveal">
+          <SectionTitle title="Выполненные работы" subtitle="Объекты, на которых мы работали" />
+        </div>
         <div className="grid">
-          {list.map((w) => (
-            <div key={w.title} className="work">
+          {list.map((w, i) => (
+            <div
+              key={w.title}
+              className="work reveal"
+              style={{ transitionDelay: `${i * 80}ms` }}
+            >
               <div className="work__year">{w.year}</div>
               <h3>{w.title}</h3>
               <p>{w.text}</p>

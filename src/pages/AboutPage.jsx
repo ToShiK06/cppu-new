@@ -11,43 +11,39 @@ export default function AboutPage() {
   return (
     <section className="section">
       <div className="container">
-        <Breadcrumbs items={[{ label: "Главная", to: "/" }, { label: "О компании" }]} />
-        <SectionTitle
-          title="О компании"
-          subtitle="Полный спектр услуг в области обеспечения пожарной безопасности"
-        />
+        <div className="reveal">
+          <Breadcrumbs items={[{ label: "Главная", to: "/" }, { label: "О компании" }]} />
+          <SectionTitle
+            title="О компании"
+            subtitle="Полный спектр услуг в области обеспечения пожарной безопасности"
+          />
+        </div>
 
         <div className="about">
           <div className="about__main">
-            <h3>{company.brand}</h3>
-            <p className="about__lead">{company.legalName}</p>
-            <p>{company.description}</p>
-            <p>
+            <h3 className="reveal">{company.brand}</h3>
+            <p className="about__lead reveal delay-1">{company.legalName}</p>
+            <p className="reveal delay-2">{company.description}</p>
+            <p className="reveal delay-2">
               В 2012 году на базе Центра создано {company.school}, основным направлением
               деятельности которого является обучение мерам пожарной безопасности по программам
               пожарно-технического минимума. {company.electroLab}.
             </p>
-            <p>
+            <p className="reveal delay-3">
               Одной из главных задач, стоящих перед нашим Центром, является квалифицированное
-              и качественное выполнение работ в короткие сроки. Мы предоставляем сертифицированное
-              оборудование для обеспечения Вашей безопасной работы.
+              и качественное выполнение работ в короткие сроки.
             </p>
-            <p>
-              Пожарная безопасность — основное направление работы нашей компании. Мы предлагаем
-              полный комплекс услуг в области пожарной безопасности в Великом Новгороде и
-              Новгородской области, а также в других городах Северо-Запада и Центра России.
-            </p>
-            <blockquote className="about__quote">
+            <blockquote className="about__quote reveal delay-3">
               «{company.slogan}»
             </blockquote>
-            <p className="about__sign">
+            <p className="about__sign reveal delay-4">
               С уважением,<br />
               Руководитель Центра противопожарных услуг,<br />
               Дмитрий Семыкин
             </p>
           </div>
 
-          <aside className="about__aside">
+          <aside className="about__aside reveal-right">
             <h4>История</h4>
             <ul className="about__timeline">
               {company.history.map((h) => <li key={h}>{h}</li>)}

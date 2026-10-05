@@ -1,22 +1,38 @@
 import { useState } from "react";
 import SectionTitle from "../ui/SectionTitle";
 import Input from "../ui/Input";
+import PhoneInput from "../ui/PhoneInput";
 import Button from "../ui/Button";
 import { submitTrainingRequest } from "../../services/firestore";
 import { trainingCourse } from "../../data/training";
+import { isValidPhone } from "../../utils/phone";
 import "./Training.css";
 
 export default function Training() {
   const [form, setForm] = useState({ name: "", phone: "" });
   const [status, setStatus] = useState(null);
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    const next = {};
+    if (!form.name.trim()) next.name = "Введите имя";
+    if (!form.phone.trim()) {
+      next.phone = "Введите телефон";
+    } else if (!isValidPhone(form.phone)) {
+      next.phone = "Введите корректный номер телефона";
+    }
+    setErrors(next);
+    return Object.keys(next).length === 0;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.name || !form.phone) return;
+    if (!validate()) return;
     try {
       await submitTrainingRequest(form);
       setStatus("success");
       setForm({ name: "", phone: "" });
+      setErrors({});
     } catch {
       setStatus("error");
     }
@@ -29,7 +45,7 @@ export default function Training() {
           title="Обучение ДПО"
           subtitle="Охрана труда и обучение мерам пожарной безопасности"
         />
-        <div className="training">
+        <div className="training reveal">
           <div className="training__info">
             <div className="training__badge">{trainingCourse.hours}</div>
             <h3 className="training__heading">
@@ -47,22 +63,34 @@ export default function Training() {
               Результат обучения: удостоверения по «Охране труда» и «Обучению мерам пожарной безопасности».
             </p>
           </div>
-          <form className="training__form" onSubmit={handleSubmit}>
+          <form className="training__form" onSubmit={handleSubmit} noValidate>
             <h3>Оставить заявку на обучение</h3>
-            <Input
-              label="Ваше имя"
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-              placeholder="Иван Иванов"
-              required
-            />
-            <Input
+
+            <div>
+              <Input
+                label="Ваше имя"
+                value={form.name}
+                onChange={(e) => {
+                  setForm({ ...form, name: e.target.value });
+                  if (errors.name) setErrors({ ...errors, name: null });
+                }}
+                placeholder="Иван Иванов"
+                required
+              />
+              {errors.name && <span className="field__error">{errors.name}</span>}
+            </div>
+
+            <PhoneInput
               label="Телефон для связи"
               value={form.phone}
-              onChange={(e) => setForm({ ...form, phone: e.target.value })}
-              placeholder="+7 (___) ___-__-__"
+              onChange={(val) => {
+                setForm({ ...form, phone: val });
+                if (errors.phone) setErrors({ ...errors, phone: null });
+              }}
+              error={errors.phone}
               required
             />
+
             <label className="training__agree">
               <input type="checkbox" required />
               <span>Даю согласие на обработку персональных данных</span>

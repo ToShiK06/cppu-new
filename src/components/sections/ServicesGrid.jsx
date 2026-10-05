@@ -5,16 +5,32 @@ import "./ServicesGrid.css";
 
 export default function ServicesGrid({ limit = 12 }) {
   const list = limit ? services.slice(0, limit) : services;
+
+  const handleMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    card.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+    card.style.setProperty("--my", `${e.clientY - rect.top}px`);
+  };
+
   return (
     <section className="section" id="services">
       <div className="container">
-        <SectionTitle
-          title="Услуги центра"
-          subtitle="Наши специалисты по пожарной безопасности готовы предложить вам следующие услуги"
-        />
+        <div className="reveal">
+          <SectionTitle
+            title="Услуги центра"
+            subtitle="Наши специалисты по пожарной безопасности готовы предложить вам следующие услуги"
+          />
+        </div>
         <div className="grid">
-          {list.map((s) => (
-            <Link to={`/services/${s.slug}`} key={s.slug} className="service-card">
+          {list.map((s, i) => (
+            <Link
+              to={`/services/${s.slug}`}
+              key={s.slug}
+              className="service-card reveal"
+              style={{ transitionDelay: `${(i % 6) * 60}ms` }}
+              onMouseMove={handleMove}
+            >
               <span className="service-card__cat">{s.category}</span>
               <h3 className="service-card__title">{s.title}</h3>
               <p className="service-card__desc">{s.description}</p>
@@ -26,7 +42,7 @@ export default function ServicesGrid({ limit = 12 }) {
           ))}
         </div>
         {limit < services.length && (
-          <div style={{ textAlign: "center", marginTop: 48 }}>
+          <div style={{ textAlign: "center", marginTop: 48 }} className="reveal">
             <Link to="/services" className="btn btn--ghost">Все услуги</Link>
           </div>
         )}

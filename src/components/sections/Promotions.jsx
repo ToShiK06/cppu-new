@@ -7,10 +7,17 @@ export default function Promotions() {
   return (
     <section className="section" id="promotions">
       <div className="container">
-        <SectionTitle title="Акции" subtitle="Специальные предложения для наших клиентов" />
+        <div className="reveal">
+          <SectionTitle title="Акции" subtitle="Специальные предложения для наших клиентов" />
+        </div>
         <div className="grid">
-          {promotions.map((p) => (
-            <Link key={p.id} to={`/promotions/${p.slug}`} className="promo">
+          {promotions.map((p, i) => (
+            <Link
+              key={p.id}
+              to={`/promotions/${p.slug}`}
+              className="promo reveal"
+              style={{ transitionDelay: `${i * 90}ms` }}
+            >
               <div className="promo__highlight">{p.highlight}</div>
               <h3>{p.title}</h3>
               <p>{p.short}</p>

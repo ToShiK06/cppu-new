@@ -91,3 +91,10 @@ export async function saveChatMessage(sessionId, message) {
     createdAt: serverTimestamp(),
   });
 }
+
+export function subscribeCallbacks(callback) {
+  const q = query(collection(db, "callbacks"), orderBy("createdAt", "desc"));
+  return onSnapshot(q, (snap) => {
+    callback(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
+  });
+}

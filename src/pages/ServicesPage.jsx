@@ -1,23 +1,41 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useServices } from "../hooks/useServices";
 import SectionTitle from "../components/ui/SectionTitle";
 import Breadcrumbs from "../components/ui/Breadcrumbs";
+import Button from "../components/ui/Button";
 import { setMeta, pageMeta } from "../utils/seo";
+import servicesBg from "../assets/images/services-bg.jpg";
 import "./ServicesPage.css";
+
+const PAGE_SIZE = 6;
 
 export default function ServicesPage() {
   const { services, categories, category, setCategory, search, setSearch } = useServices();
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   useEffect(() => setMeta(pageMeta.services), []);
+  useEffect(() => setVisibleCount(PAGE_SIZE), [category, search]);
+
+  const visibleServices = useMemo(
+    () => services.slice(0, visibleCount),
+    [services, visibleCount]
+  );
+
+  const hasMore = visibleCount < services.length;
 
   return (
-    <section className="section">
-      <div className="container">
-        <Breadcrumbs items={[{ label: "Главная", to: "/" }, { label: "Услуги" }]} />
-        <SectionTitle title="Каталог услуг" subtitle="Все направления работы компании ЦППУ" />
+    <div
+      className="services-page"
+      style={{ backgroundImage: `url(${servicesBg})` }}
+    >
+      <div className="container services-page__inner">
+        <div className="reveal">
+          <Breadcrumbs items={[{ label: "Главная", to: "/" }, { label: "Услуги" }]} />
+          <SectionTitle title="Каталог услуг" subtitle="Все направления работы компании ЦППУ" />
+        </div>
 
-        <div className="services-filter">
+        <div className="services-filter reveal">
           <input
             className="input"
             placeholder="Поиск услуги..."
@@ -38,8 +56,13 @@ export default function ServicesPage() {
         </div>
 
         <div className="grid">
-          {services.map((s) => (
-            <Link to={`/services/${s.slug}`} key={s.slug} className="service-card">
+          {visibleServices.map((s, i) => (
+            <Link
+              to={`/services/${s.slug}`}
+              key={s.slug}
+              className="service-card reveal"
+              style={{ transitionDelay: `${(i % 6) * 60}ms` }}
+            >
               <span className="service-card__cat">{s.category}</span>
               <h3 className="service-card__title">{s.title}</h3>
               <p className="service-card__desc">{s.description}</p>
@@ -52,7 +75,18 @@ export default function ServicesPage() {
         </div>
 
         {services.length === 0 && <p className="services-empty">Ничего не найдено.</p>}
+
+        {hasMore && (
+          <div className="services-more reveal">
+            <Button variant="ghost" onClick={() => setVisibleCount((v) => v + PAGE_SIZE)}>
+              Показать ещё {Math.min(PAGE_SIZE, services.length - visibleCount)}
+            </Button>
+            <span className="services-more__counter">
+              Показано {visibleCount} из {services.length}
+            </span>
+          </div>
+        )}
       </div>
-    </section>
+    </div>
   );
 }

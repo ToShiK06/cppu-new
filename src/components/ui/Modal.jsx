@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { createPortal } from "react-dom";
 import "./Modal.css";
 
 export default function Modal({ open, onClose, title, children }) {
@@ -8,9 +9,18 @@ export default function Modal({ open, onClose, title, children }) {
     return () => document.removeEventListener("keydown", onEsc);
   }, [open, onClose]);
 
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
   if (!open) return null;
 
-  return (
+  return createPortal(
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal__header">
@@ -19,6 +29,7 @@ export default function Modal({ open, onClose, title, children }) {
         </div>
         <div className="modal__body">{children}</div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

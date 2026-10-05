@@ -5,6 +5,12 @@
   background: var(--accent); color: #fff; font-weight: 600; font-size: 14px;
   box-shadow: var(--shadow-lg);
   transition: all .2s ease;
+  animation: pulse 3s ease-in-out infinite;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.ai-fab:hover {
+  animation-play-state: paused;
+  transform: translateY(-3px) scale(1.03);
 }
 .ai-fab:hover { background: var(--accent-hover); transform: translateY(-2px); }
 @media (max-width: 600px) {

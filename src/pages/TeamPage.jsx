@@ -18,15 +18,21 @@ export default function TeamPage() {
   return (
     <section className="section">
       <div className="container">
-        <Breadcrumbs items={[{ label: "Главная", to: "/" }, { label: "Сотрудники" }]} />
-        <SectionTitle
-          title="Сотрудники Центра"
-          subtitle="Квалифицированные специалисты с высшим и средним специальным образованием, имеющие теоретическую подготовку и практический опыт работы"
-        />
+        <div className="reveal">
+          <Breadcrumbs items={[{ label: "Главная", to: "/" }, { label: "Сотрудники" }]} />
+          <SectionTitle
+            title="Сотрудники Центра"
+            subtitle="Квалифицированные специалисты с высшим и средним специальным образованием, имеющие теоретическую подготовку и практический опыт работы"
+          />
+        </div>
 
         <div className="grid">
-          {team.map((p) => (
-            <div key={p.name} className="team-card">
+          {team.map((p, i) => (
+            <div
+              key={p.name}
+              className="team-card reveal"
+              style={{ transitionDelay: `${(i % 6) * 60}ms` }}
+            >
               <div className="team-card__initials">{initials(p.name)}</div>
               <h3 className="team-card__name">{p.name}</h3>
               <p className="team-card__role">{p.role}</p>

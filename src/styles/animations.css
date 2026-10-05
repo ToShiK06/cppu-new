@@ -1,22 +1,150 @@
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+/* ---------- Появления ---------- */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-@keyframes slideIn {
-  from { opacity: 0; transform: translateX(30px); }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeLeft {
+  from { opacity: 0; transform: translateX(32px); }
   to { opacity: 1; transform: translateX(0); }
 }
+@keyframes fadeRight {
+  from { opacity: 0; transform: translateX(-32px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(.94); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ---------- Движения ---------- */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
 @keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: .85; }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
-.animate-up { animation: fadeUp .6s ease both; }
-.animate-in { animation: fadeIn .4s ease both; }
-.animate-slide { animation: slideIn .3s ease both; }
+
+/* ---------- Утилитарные классы ---------- */
+.animate-fade { animation: fadeIn .6s ease both; }
+.animate-up { animation: fadeUp .6s cubic-bezier(.2,.8,.2,1) both; }
+.animate-down { animation: fadeDown .6s cubic-bezier(.2,.8,.2,1) both; }
+.animate-left { animation: fadeLeft .6s cubic-bezier(.2,.8,.2,1) both; }
+.animate-right { animation: fadeRight .6s cubic-bezier(.2,.8,.2,1) both; }
+.animate-scale { animation: scaleIn .5s cubic-bezier(.2,.8,.2,1) both; }
+
+/* Задержки */
+.delay-1 { animation-delay: .08s; }
+.delay-2 { animation-delay: .16s; }
+.delay-3 { animation-delay: .24s; }
+.delay-4 { animation-delay: .32s; }
+.delay-5 { animation-delay: .40s; }
+.delay-6 { animation-delay: .48s; }
+
+/* ---------- Анимация при скролле ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-36px);
+  transition:
+    opacity .8s cubic-bezier(.2,.8,.2,1),
+    transform .8s cubic-bezier(.2,.8,.2,1);
+}
+.reveal-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(36px);
+  transition:
+    opacity .8s cubic-bezier(.2,.8,.2,1),
+    transform .8s cubic-bezier(.2,.8,.2,1);
+}
+.reveal-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(.94);
+  transition:
+    opacity .7s cubic-bezier(.2,.8,.2,1),
+    transform .7s cubic-bezier(.2,.8,.2,1);
+}
+.reveal-scale.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ---------- Hover-подъём ---------- */
+.hover-lift {
+  transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.7);
+}
+
+/* ---------- Мягкое мерцание кнопок ---------- */
+.btn--primary {
+  position: relative;
+  overflow: hidden;
+}
+.btn--primary::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.18) 50%,
+    transparent 100%
+  );
+  transition: left .6s ease;
+}
+.btn--primary:hover::after {
+  left: 100%;
+}
+
+/* ---------- Уважение к системе ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
