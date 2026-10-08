@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom";
 import { promotions } from "../../data/promotions";
 import SectionTitle from "../ui/SectionTitle";
+import heroBg from "../../assets/images/hero-bg.jpg";
 import "./Promotions.css";
 
 export default function Promotions() {
   return (
-    <section className="section" id="promotions">
-      <div className="container">
+    <section
+      className="section promotions-section"
+      id="promotions"
+      style={{ backgroundImage: `url(${heroBg})` }}
+    >
+      <div className="container promotions-section__inner">
         <div className="reveal">
           <SectionTitle title="Акции" subtitle="Специальные предложения для наших клиентов" />
         </div>

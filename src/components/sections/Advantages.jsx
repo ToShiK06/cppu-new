@@ -1,4 +1,5 @@
 import SectionTitle from "../ui/SectionTitle";
+import heroBg from "../../assets/images/hero-bg.jpg";
 import "./Advantages.css";
 
 const items = [
@@ -12,8 +13,12 @@ const items = [
 
 export default function Advantages() {
   return (
-    <section className="section" id="advantages">
-      <div className="container">
+    <section
+      className="section advantages-section"
+      id="advantages"
+      style={{ backgroundImage: `url(${heroBg})` }}
+    >
+      <div className="container advantages-section__inner">
         <div className="reveal">
           <SectionTitle
             title="Почему выбирают нас"
