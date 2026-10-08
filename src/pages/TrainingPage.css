@@ -12,54 +12,304 @@
   padding: 48px 0 96px;
 }
 
+/* ============ DPO-карточки ============ */
 .training-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  margin-bottom: 64px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 80px;
 }
-.training-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 28px;
+
+.dpo-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 14px;
+  padding: 32px 28px;
+  background: rgba(22, 27, 34, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(48, 54, 61, 0.9);
+  border-radius: 18px;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    transform .35s cubic-bezier(.2, .8, .2, 1),
+    border-color .3s ease,
+    box-shadow .35s ease,
+    background .3s ease;
 }
-.training-card__price {
-  font-size: 28px;
+
+/* Оранжевая полоска сверху */
+.dpo-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), rgba(255, 90, 31, 0.15));
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s cubic-bezier(.2, .8, .2, 1);
+}
+
+/* Мягкое свечение по курсору */
+.dpo-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    400px circle at var(--mx, 50%) var(--my, 0%),
+    rgba(255, 90, 31, 0.12),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.dpo-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 90, 31, 0.55);
+  background: rgba(22, 27, 34, 0.85);
+  box-shadow:
+    0 20px 40px -20px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 90, 31, 0.15);
+}
+
+.dpo-card:hover::before {
+  transform: scaleX(1);
+}
+
+.dpo-card:hover::after {
+  opacity: 1;
+}
+
+/* Акцентная карточка (два курса) */
+.dpo-card--accent {
+  background: linear-gradient(
+    160deg,
+    rgba(255, 90, 31, 0.1) 0%,
+    rgba(22, 27, 34, 0.85) 60%
+  );
+  border-color: rgba(255, 90, 31, 0.4);
+}
+
+/* Бейдж с количеством часов */
+.dpo-card__badge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  background: rgba(255, 90, 31, 0.12);
+  border: 1px solid rgba(255, 90, 31, 0.3);
+  border-radius: 100px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Иконка в круге */
+.dpo-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 90, 31, 0.12);
+  color: var(--accent);
+  border: 1px solid rgba(255, 90, 31, 0.25);
+  transition: all .3s ease;
+}
+
+.dpo-card:hover .dpo-card__icon {
+  background: var(--accent);
+  color: #fff;
+  transform: rotate(-4deg) scale(1.05);
+}
+
+.dpo-card__title {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.3px;
+  line-height: 1.3;
+}
+
+.dpo-card__price {
+  font-size: 32px;
   font-weight: 800;
   color: var(--accent);
+  letter-spacing: -1px;
+  line-height: 1;
+  margin: 6px 0 4px;
 }
-.training-card__list {
+
+.dpo-card__list {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin-top: 4px;
 }
-.training-card__list li {
+
+.dpo-card__list li {
   display: flex;
   flex-direction: column;
   gap: 4px;
   font-size: 14px;
   color: var(--muted);
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--border);
+  padding: 12px 0 12px 22px;
+  position: relative;
+  border-bottom: 1px solid rgba(48, 54, 61, 0.5);
 }
-.training-card__list li:last-child {
+.dpo-card__list li:last-child {
   border-bottom: none;
+  padding-bottom: 0;
 }
-.training-card__list strong {
+.dpo-card__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 18px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px 1px rgba(255, 90, 31, 0.5);
+}
+
+.dpo-card__list strong {
   color: var(--text);
   font-size: 15px;
+  font-weight: 600;
 }
+
+.dpo-card__list span {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ============ Лекторы ============ */
 .training-lecturers__title {
   font-size: 24px;
-  margin-bottom: 24px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 28px;
+  letter-spacing: -0.4px;
 }
-.team-card__bio {
+
+.lecturer-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 28px;
+  background: rgba(22, 27, 34, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(48, 54, 61, 0.9);
+  border-radius: 18px;
+  overflow: hidden;
+  transition:
+    transform .3s cubic-bezier(.2, .8, .2, 1),
+    border-color .3s ease,
+    background .3s ease;
+}
+
+.lecturer-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), rgba(255, 90, 31, 0.15));
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s cubic-bezier(.2, .8, .2, 1);
+}
+
+.lecturer-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 90, 31, 0.5);
+  background: rgba(22, 27, 34, 0.85);
+}
+
+.lecturer-card:hover::before {
+  transform: scaleX(1);
+}
+
+.lecturer-card__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255, 90, 31, 0.25), rgba(255, 90, 31, 0.1));
+  border: 1px solid rgba(255, 90, 31, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--accent);
+  margin-bottom: 12px;
+  transition: transform .3s ease;
+}
+
+.lecturer-card:hover .lecturer-card__avatar {
+  transform: scale(1.06);
+}
+
+.lecturer-card__name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.lecturer-card__role {
   font-size: 13px;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.lecturer-card__bio {
+  font-size: 13.5px;
   color: var(--muted);
-  margin-top: 8px;
-  line-height: 1.5;
+  line-height: 1.55;
+  margin-top: 4px;
+}
+
+/* ============ Мобильные ============ */
+@media (max-width: 900px) {
+  .training-page__inner {
+    padding: 32px 0 64px;
+  }
+  .training-grid {
+    gap: 18px;
+    margin-bottom: 56px;
+  }
+  .dpo-card {
+    padding: 26px 22px;
+    border-radius: 16px;
+  }
+  .dpo-card__price {
+    font-size: 26px;
+  }
+  .dpo-card__title {
+    font-size: 17px;
+  }
+  .lecturer-card {
+    padding: 22px;
+    border-radius: 16px;
+  }
 }

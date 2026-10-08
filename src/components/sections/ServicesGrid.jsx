@@ -27,16 +27,16 @@ export default function ServicesGrid({ limit = 12 }) {
             <Link
               to={`/services/${s.slug}`}
               key={s.slug}
-              className="service-card reveal"
+              className="ui-card reveal"
               style={{ transitionDelay: `${(i % 6) * 60}ms` }}
               onMouseMove={handleMove}
             >
-              <span className="service-card__cat">{s.category}</span>
-              <h3 className="service-card__title">{s.title}</h3>
-              <p className="service-card__desc">{s.description}</p>
-              <div className="service-card__footer">
-                <span className="service-card__price">{s.price}</span>
-                <span className="service-card__arrow">→</span>
+              <span className="ui-card__cat">{s.category}</span>
+              <h3 className="ui-card__title">{s.title}</h3>
+              <p className="ui-card__text">{s.description}</p>
+              <div className="ui-card__footer">
+                <span className="ui-card__price">{s.price}</span>
+                <span className="ui-card__arrow">→</span>
               </div>
             </Link>
           ))}

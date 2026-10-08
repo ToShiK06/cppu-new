@@ -1,4 +1,3 @@
-/* Страница отзывов — тёмный фон с искрами */
 .reviews-page {
   position: relative;
   min-height: 100vh;
@@ -19,39 +18,6 @@
   padding: 40px 0;
 }
 
-/* Карточки отзывов — поверх искр */
-.review {
-  background: rgba(22, 27, 34, 0.75);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(48, 54, 61, 0.9);
-  border-radius: var(--radius);
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  transition: border-color .25s ease, transform .25s ease, background .25s ease;
-}
-
-.review:hover {
-  border-color: var(--accent);
-  background: rgba(22, 27, 34, 0.9);
-  transform: translateY(-4px);
-}
-
-.review__text {
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--text);
-}
-
-.review__author {
-  font-size: 14px;
-  color: var(--accent);
-  font-weight: 600;
-}
-
-/* Форма отзыва */
 .reviews__form-wrap {
   margin-top: 64px;
   max-width: 560px;
@@ -74,7 +40,6 @@
   padding: 28px;
 }
 
-/* Мобильные */
 @media (max-width: 900px) {
   .reviews-page {
     padding: 32px 0 64px;

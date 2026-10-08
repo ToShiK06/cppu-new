@@ -5,6 +5,8 @@ import { getServiceDetail } from "../data/serviceDetails";
 import { company } from "../data/company";
 import { setMeta } from "../utils/seo";
 import Breadcrumbs from "../components/ui/Breadcrumbs";
+import SparksBackground from "../components/ui/SparksBackground";
+import FlameBackground from "../components/ui/FlameBackground";
 import "./ServiceDetailPage.css";
 
 export default function ServiceDetailPage() {
@@ -24,8 +26,11 @@ export default function ServiceDetailPage() {
   if (!service) return <Navigate to="/services" replace />;
 
   return (
-    <section className="section">
-      <div className="container">
+    <div className="service-detail-page">
+      <FlameBackground />
+      <SparksBackground count={90} />
+
+      <div className="container service-detail-page__inner">
         <div className="reveal">
           <Breadcrumbs
             items={[
@@ -86,6 +91,6 @@ export default function ServiceDetailPage() {
           </aside>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

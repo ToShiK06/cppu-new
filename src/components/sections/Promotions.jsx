@@ -20,12 +20,20 @@ export default function Promotions() {
             <Link
               key={p.id}
               to={`/promotions/${p.slug}`}
-              className="promo reveal"
+              className="ui-card ui-card--accent reveal"
               style={{ transitionDelay: `${i * 90}ms` }}
             >
-              <div className="promo__highlight">{p.highlight}</div>
-              <h3>{p.title}</h3>
-              <p>{p.short}</p>
+              <span className="ui-card__cat">{p.highlight}</span>
+              <h3 className="ui-card__title" style={{ fontSize: 22 }}>
+                {p.title}
+              </h3>
+              <p className="ui-card__text">{p.short}</p>
+              <span
+                className="ui-card__arrow"
+                style={{ alignSelf: "flex-end", marginTop: "auto" }}
+              >
+                →
+              </span>
             </Link>
           ))}
         </div>

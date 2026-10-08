@@ -30,16 +30,39 @@ export default function TeamPage() {
           {team.map((p, i) => (
             <div
               key={p.name}
-              className="team-card reveal"
+              className="ui-card reveal"
               style={{ transitionDelay: `${(i % 6) * 60}ms` }}
             >
-              <div className="team-card__initials">{initials(p.name)}</div>
-              <h3 className="team-card__name">{p.name}</h3>
-              <p className="team-card__role">{p.role}</p>
-              {p.bio && <p className="team-card__bio">{p.bio}</p>}
-              <div className="team-card__contacts">
-                <a href={`tel:${p.phone.replace(/\D/g, "")}`}>{p.phone}</a>
-                {p.email && <a href={`mailto:${p.email}`}>{p.email}</a>}
+              <div className="team-avatar">{initials(p.name)}</div>
+              <h3 className="ui-card__title">{p.name}</h3>
+              <span className="ui-card__cat" style={{ marginTop: -4 }}>{p.role}</span>
+              {p.bio && <p className="ui-card__text">{p.bio}</p>}
+              <div
+                style={{
+                  marginTop: "auto",
+                  paddingTop: 14,
+                  borderTop: "1px solid rgba(48, 54, 61, 0.6)",
+                }}
+              >
+                <a
+                  href={`tel:${p.phone.replace(/\D/g, "")}`}
+                  style={{ display: "block", fontSize: 13, color: "var(--muted)" }}
+                >
+                  {p.phone}
+                </a>
+                {p.email && (
+                  <a
+                    href={`mailto:${p.email}`}
+                    style={{
+                      display: "block",
+                      fontSize: 13,
+                      color: "var(--muted)",
+                      marginTop: 4,
+                    }}
+                  >
+                    {p.email}
+                  </a>
+                )}
               </div>
             </div>
           ))}

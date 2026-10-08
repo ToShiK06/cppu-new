@@ -1,43 +1,246 @@
-.back-link { display: inline-block; color: var(--muted); font-size: 14px; margin-bottom: 32px; }
-.back-link:hover { color: var(--accent); }
-.detail { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; align-items: start; }
-.detail__title { font-size: clamp(28px, 4vw, 44px); margin: 12px 0 20px; }
-.detail__desc { font-size: 18px; color: var(--muted); margin-bottom: 24px; }
-.detail__price { font-size: 22px; margin-bottom: 40px; }
-.detail__price strong { color: var(--accent); }
-.detail__sub { font-size: 20px; margin-bottom: 16px; }
-.detail__list li {
-  padding: 10px 0 10px 28px; position: relative; color: var(--muted);
-  border-bottom: 1px solid var(--border);
+/* Страница услуги — общий фон */
+.service-detail-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 48px 0 96px;
+  background: var(--bg);
+  overflow: hidden;
+  isolation: isolate;
 }
-.detail__list li::before {
-  content: ""; position: absolute; left: 0; top: 18px;
-  width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+
+.service-detail-page__inner {
+  position: relative;
+  z-index: 1;
 }
-.detail__aside {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 28px;
-  display: flex; flex-direction: column; gap: 12px;
-  position: sticky; top: calc(var(--header-h) + 24px);
+
+/* ---- Двухколоночная раскладка ---- */
+.detail {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+  align-items: start;
 }
-.detail__aside h3 { margin-bottom: 8px; }
-.detail__aside a { color: var(--muted); font-size: 15px; }
-.detail__aside a:hover { color: var(--accent); }
-.detail__aside .btn { margin-top: 16px; }
-@media (max-width: 900px) {
-  .detail { grid-template-columns: 1fr; }
-  .detail__aside { position: static; }
+
+.detail__main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
+
+/* ---- Шапка услуги ---- */
+.detail__title {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  line-height: 1.1;
+  margin: 12px 0 20px;
+  color: var(--text);
+}
+
+.detail__desc {
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.detail__price {
+  display: inline-block;
+  font-size: 15px;
+  color: var(--muted);
+  padding: 10px 18px;
+  background: rgba(255, 90, 31, 0.1);
+  border: 1px solid rgba(255, 90, 31, 0.3);
+  border-radius: 100px;
+}
+.detail__price strong {
+  color: var(--accent);
+  font-weight: 700;
+  margin-left: 4px;
+}
+
+/* ---- Вводный текст и абзацы ---- */
 .detail__intro {
   font-size: 17px;
   color: var(--text);
-  margin-bottom: 16px;
+  line-height: 1.65;
+  margin-bottom: 8px;
+  padding: 20px 24px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 90, 31, 0.08) 0%,
+    rgba(255, 90, 31, 0.02) 100%
+  );
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
+
 .detail__text {
-  font-size: 15px;
+  font-size: 15.5px;
   color: var(--muted);
-  margin-bottom: 14px;
+  line-height: 1.7;
+  margin-bottom: 4px;
 }
+
+/* ---- Секции (бывшие серые панели) ---- */
 .detail__section {
-  margin-top: 32px;
+  position: relative;
+  background: rgba(22, 27, 34, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(48, 54, 61, 0.9);
+  border-radius: var(--radius);
+  padding: 28px 28px 24px;
+  transition: border-color .25s ease, transform .25s ease;
+  overflow: hidden;
+}
+
+/* Оранжевая полоска сверху — как в карточках услуг */
+.detail__section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), rgba(255, 90, 31, 0.15));
+  border-radius: 2px;
+}
+
+.detail__section:hover {
+  border-color: rgba(255, 90, 31, 0.5);
+}
+
+.detail__sub {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 18px;
+  letter-spacing: -0.2px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.detail__sub::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px 2px rgba(255, 90, 31, 0.5);
+  flex-shrink: 0;
+}
+
+/* ---- Список с буллетами ---- */
+.detail__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detail__list li {
+  position: relative;
+  padding: 10px 0 10px 24px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+  border-bottom: 1px solid rgba(48, 54, 61, 0.5);
+}
+.detail__list li:last-child {
+  border-bottom: none;
+}
+.detail__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 18px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ---- Боковая панель «Оставить заявку» ---- */
+.detail__aside {
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+  background: rgba(22, 27, 34, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(48, 54, 61, 0.9);
+  border-radius: var(--radius);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detail__aside h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 4px;
+}
+
+.detail__aside p {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0 0 8px;
+  line-height: 1.5;
+}
+
+.detail__aside a {
+  display: block;
+  font-size: 14px;
+  color: var(--muted);
+  padding: 6px 0;
+  transition: color .2s;
+}
+.detail__aside a:hover {
+  color: var(--accent);
+}
+
+/* Кнопка «Заказать выезд» — компактная и аккуратная */
+.detail__aside .btn {
+  margin-top: 12px;
+  padding: 14px 20px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+}
+
+/* ---- Ссылка «← Назад к услугам» ---- */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 28px;
+  transition: color .2s;
+}
+.back-link:hover {
+  color: var(--accent);
+}
+
+/* ---- Мобильные ---- */
+@media (max-width: 900px) {
+  .service-detail-page {
+    padding: 32px 0 64px;
+  }
+  .detail {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .detail__aside {
+    position: static;
+  }
+  .detail__section {
+    padding: 22px 20px 18px;
+  }
+  .detail__title {
+    font-size: 28px;
+  }
 }

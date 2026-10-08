@@ -119,3 +119,153 @@ select.input {
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================================
+   Универсальная карточка — используется на всём сайте
+   ============================================================ */
+.ui-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px 24px;
+  background: rgba(22, 27, 34, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(48, 54, 61, 0.9);
+  border-radius: 18px;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    transform .35s cubic-bezier(.2, .8, .2, 1),
+    border-color .3s ease,
+    box-shadow .35s ease,
+    background .3s ease;
+}
+
+.ui-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), rgba(255, 90, 31, 0.15));
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s cubic-bezier(.2, .8, .2, 1);
+}
+
+.ui-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    400px circle at var(--mx, 50%) var(--my, 0%),
+    rgba(255, 90, 31, 0.12),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.ui-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 90, 31, 0.55);
+  background: rgba(22, 27, 34, 0.85);
+  box-shadow:
+    0 20px 40px -20px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 90, 31, 0.15);
+}
+
+.ui-card:hover::before {
+  transform: scaleX(1);
+}
+
+.ui-card:hover::after {
+  opacity: 1;
+}
+
+.ui-card--accent {
+  background: linear-gradient(
+    160deg,
+    rgba(255, 90, 31, 0.1) 0%,
+    rgba(22, 27, 34, 0.85) 60%
+  );
+  border-color: rgba(255, 90, 31, 0.4);
+}
+
+.ui-card__title {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.3px;
+  line-height: 1.3;
+}
+
+.ui-card__text {
+  font-size: 14.5px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.ui-card__cat {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 4px 10px;
+  background: rgba(255, 90, 31, 0.1);
+  border-radius: 100px;
+}
+
+.ui-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid rgba(48, 54, 61, 0.6);
+}
+
+.ui-card__price {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.ui-card__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 90, 31, 0.1);
+  color: var(--accent);
+  font-size: 16px;
+  transition: all .25s cubic-bezier(.2, .8, .2, 1);
+}
+
+.ui-card:hover .ui-card__arrow {
+  background: var(--accent);
+  color: #fff;
+  transform: translateX(4px);
+}
+
+@media (max-width: 720px) {
+  .ui-card {
+    padding: 24px 20px;
+    border-radius: 14px;
+  }
+  .ui-card__title {
+    font-size: 17px;
+  }
+}

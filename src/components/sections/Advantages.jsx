@@ -29,12 +29,12 @@ export default function Advantages() {
           {items.map((it, i) => (
             <div
               key={it.title}
-              className="advantage reveal-scale"
+              className="ui-card ui-card--accent reveal-scale"
               style={{ transitionDelay: `${i * 70}ms` }}
             >
-              <div className="advantage__num">{String(i + 1).padStart(2, "0")}</div>
-              <h3>{it.title}</h3>
-              <p>{it.text}</p>
+              <div className="advantage-num">{String(i + 1).padStart(2, "0")}</div>
+              <h3 className="ui-card__title">{it.title}</h3>
+              <p className="ui-card__text">{it.text}</p>
             </div>
           ))}
         </div>

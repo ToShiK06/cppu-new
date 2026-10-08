@@ -20,7 +20,7 @@ export default function TrainingPage() {
   return (
     <div className="training-page">
       <FlameBackground />
-      <SparksBackground count={100} />
+      <SparksBackground count={90} />
 
       <div className="container training-page__inner">
         <div className="reveal">
@@ -29,13 +29,13 @@ export default function TrainingPage() {
         </div>
 
         <div className="training-grid">
-          <div className="training-card reveal-scale" style={{ transitionDelay: "0ms" }}>
-            <span className="service-card__cat">{trainingCourse.hours}</span>
-            <h3 className="service-card__title">
-              Два курса за {trainingCourse.fullPrice} рублей
+          <div className="dpo-card dpo-card--accent reveal" style={{ transitionDelay: "0ms" }}>
+            <div className="dpo-card__badge">{trainingCourse.hours}</div>
+            <h3 className="dpo-card__title">
+              Два курса за {trainingCourse.fullPrice} ₽
             </h3>
-            <p className="training-card__price">{trainingCourse.price} ₽</p>
-            <ul className="training-card__list">
+            <p className="dpo-card__price">{trainingCourse.price} ₽</p>
+            <ul className="dpo-card__list">
               {trainingCourse.programs.map((p) => (
                 <li key={p.title}>
                   <strong>{p.title}</strong>
@@ -45,9 +45,15 @@ export default function TrainingPage() {
             </ul>
           </div>
 
-          <div className="training-card reveal-scale" style={{ transitionDelay: "80ms" }}>
-            <h3 className="service-card__title">Формы обучения</h3>
-            <ul className="training-card__list">
+          <div className="dpo-card reveal" style={{ transitionDelay: "80ms" }}>
+            <div className="dpo-card__icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+              </svg>
+            </div>
+            <h3 className="dpo-card__title">Формы обучения</h3>
+            <ul className="dpo-card__list">
               {trainingCourse.forms.map((f) => (
                 <li key={f.title}>
                   <strong>{f.title}</strong>
@@ -57,18 +63,32 @@ export default function TrainingPage() {
             </ul>
           </div>
 
-          <div className="training-card reveal-scale" style={{ transitionDelay: "160ms" }}>
-            <h3 className="service-card__title">Курс будет полезен</h3>
-            <ul className="training-card__list">
+          <div className="dpo-card reveal" style={{ transitionDelay: "160ms" }}>
+            <div className="dpo-card__icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <h3 className="dpo-card__title">Курс будет полезен</h3>
+            <ul className="dpo-card__list">
               {trainingCourse.audience.map((a) => (
                 <li key={a}><span>{a}</span></li>
               ))}
             </ul>
           </div>
 
-          <div className="training-card reveal-scale" style={{ transitionDelay: "240ms" }}>
-            <h3 className="service-card__title">Результат обучения</h3>
-            <ul className="training-card__list">
+          <div className="dpo-card reveal" style={{ transitionDelay: "240ms" }}>
+            <div className="dpo-card__icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+              </svg>
+            </div>
+            <h3 className="dpo-card__title">Результат обучения</h3>
+            <ul className="dpo-card__list">
               {trainingCourse.results.map((r) => (
                 <li key={r}><span>{r}</span></li>
               ))}
@@ -81,15 +101,15 @@ export default function TrainingPage() {
           {trainingCourse.lecturers.map((l, i) => (
             <div
               key={l.name}
-              className="team-card reveal"
+              className="lecturer-card reveal"
               style={{ transitionDelay: `${i * 80}ms` }}
             >
-              <div className="team-card__initials">
+              <div className="lecturer-card__avatar">
                 {l.name.split(" ").map((w) => w[0]).slice(0, 2).join("")}
               </div>
-              <h3 className="team-card__name">{l.name}</h3>
-              <p className="team-card__role">{l.role}</p>
-              <p className="team-card__bio">{l.bio}</p>
+              <h3 className="lecturer-card__name">{l.name}</h3>
+              <p className="lecturer-card__role">{l.role}</p>
+              <p className="lecturer-card__bio">{l.bio}</p>
             </div>
           ))}
         </div>

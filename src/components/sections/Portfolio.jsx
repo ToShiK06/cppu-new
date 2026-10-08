@@ -22,12 +22,12 @@ export default function Portfolio({ limit }) {
           {list.map((w, i) => (
             <div
               key={w.title}
-              className="work reveal"
+              className="ui-card reveal"
               style={{ transitionDelay: `${i * 80}ms` }}
             >
-              <div className="work__year">{w.year}</div>
-              <h3>{w.title}</h3>
-              <p>{w.text}</p>
+              <span className="ui-card__cat">{w.year}</span>
+              <h3 className="ui-card__title">{w.title}</h3>
+              <p className="ui-card__text">{w.text}</p>
             </div>
           ))}
         </div>

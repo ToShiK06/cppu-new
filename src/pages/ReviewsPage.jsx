@@ -63,11 +63,21 @@ export default function ReviewsPage() {
             {reviews.map((r, i) => (
               <div
                 key={r.id}
-                className="review reveal-scale"
+                className="ui-card ui-card--accent reveal-scale"
                 style={{ transitionDelay: `${(i % 6) * 60}ms` }}
               >
-                <p className="review__text">«{r.text}»</p>
-                <span className="review__author">{r.author}</span>
+                <p
+                  className="ui-card__text"
+                  style={{ fontSize: 15.5, color: "var(--text)", lineHeight: 1.65 }}
+                >
+                  «{r.text}»
+                </p>
+                <span
+                  className="ui-card__cat"
+                  style={{ marginTop: "auto", alignSelf: "flex-start" }}
+                >
+                  {r.author}
+                </span>
               </div>
             ))}
           </div>
