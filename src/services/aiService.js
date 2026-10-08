@@ -1,29 +1,26 @@
 import axios from "axios";
 
+const ENDPOINT =
+  process.env.REACT_APP_AI_ENDPOINT || "https://cppu-ai.layero.app/chat";
+
 export async function sendMessageToAI(messages) {
-  const endpoint = process.env.REACT_APP_AI_ENDPOINT;
-
-  if (!endpoint) {
-    return "ИИ-помощник временно недоступен. Оставьте заявку через форму, и мы свяжемся с вами.";
-  }
-
   try {
     const { data } = await axios.post(
-      endpoint,
+      ENDPOINT,
       {
         messages: messages.map((m) => ({ role: m.role, text: m.text })),
       },
       {
         headers: {
           "Content-Type": "application/json",
-          // Опциональная защита от чужих запросов (см. APP_KEY в функции)
           "x-app-key": process.env.REACT_APP_AI_APP_KEY || "",
         },
-        timeout: 25000,
+        timeout: 60000,
       }
     );
     return data.reply ?? "Не удалось получить ответ.";
   } catch (e) {
+    console.error("AI error:", e?.response?.data || e.message);
     return "Произошла ошибка. Попробуйте позже или позвоните нам.";
   }
 }
