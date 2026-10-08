@@ -148,3 +148,18 @@
     scroll-behavior: auto !important;
   }
 }
+
+@keyframes caretBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+.typewriter-caret {
+  color: var(--accent);
+  animation: caretBlink 1s steps(1) infinite;
+  margin-left: 2px;
+  font-weight: 300;
+}
+@keyframes splitRise {
+  from { opacity: 0; transform: translateY(20px) rotate(-4deg); }
+  to { opacity: 1; transform: translateY(0) rotate(0); }
+}

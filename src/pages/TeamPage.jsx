@@ -30,7 +30,7 @@ export default function TeamPage() {
           {team.map((p, i) => (
             <div
               key={p.name}
-              className="ui-card reveal"
+              className="ui-card tilt reveal"
               style={{ transitionDelay: `${(i % 6) * 60}ms` }}
             >
               <div className="team-avatar">{initials(p.name)}</div>

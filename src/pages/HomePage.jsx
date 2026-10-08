@@ -9,12 +9,14 @@ import Contacts from "../components/sections/Contacts";
 import SparksBackground from "../components/ui/SparksBackground";
 import { setMeta, pageMeta } from "../utils/seo";
 import FlameBackground from "../components/ui/FlameBackground";
+import CursorTrail from "../components/ui/CursorTrail";
 
 export default function HomePage() {
   useEffect(() => setMeta(pageMeta.home), []);
 
   return (
     <div className="home-page">
+      <CursorTrail />
       <FlameBackground />
       <SparksBackground count={120} />
 

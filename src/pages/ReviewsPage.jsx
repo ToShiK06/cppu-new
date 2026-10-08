@@ -63,7 +63,7 @@ export default function ReviewsPage() {
             {reviews.map((r, i) => (
               <div
                 key={r.id}
-                className="ui-card ui-card--accent reveal-scale"
+                className="ui-card ui-card--accent tilt reveal-scale"
                 style={{ transitionDelay: `${(i % 6) * 60}ms` }}
               >
                 <p

@@ -29,7 +29,7 @@ export default function Advantages() {
           {items.map((it, i) => (
             <div
               key={it.title}
-              className="ui-card ui-card--accent reveal-scale"
+              className="ui-card ui-card--accent tilt reveal-scale"
               style={{ transitionDelay: `${i * 70}ms` }}
             >
               <div className="advantage-num">{String(i + 1).padStart(2, "0")}</div>

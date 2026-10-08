@@ -6,13 +6,6 @@ import "./ServicesGrid.css";
 export default function ServicesGrid({ limit = 12 }) {
   const list = limit ? services.slice(0, limit) : services;
 
-  const handleMove = (e) => {
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    card.style.setProperty("--mx", `${e.clientX - rect.left}px`);
-    card.style.setProperty("--my", `${e.clientY - rect.top}px`);
-  };
-
   return (
     <section className="section" id="services">
       <div className="container">
@@ -27,9 +20,8 @@ export default function ServicesGrid({ limit = 12 }) {
             <Link
               to={`/services/${s.slug}`}
               key={s.slug}
-              className="ui-card reveal"
+              className="ui-card tilt reveal"
               style={{ transitionDelay: `${(i % 6) * 60}ms` }}
-              onMouseMove={handleMove}
             >
               <span className="ui-card__cat">{s.category}</span>
               <h3 className="ui-card__title">{s.title}</h3>

@@ -22,7 +22,7 @@ export default function Portfolio({ limit }) {
           {list.map((w, i) => (
             <div
               key={w.title}
-              className="ui-card reveal"
+              className="ui-card tilt reveal"
               style={{ transitionDelay: `${i * 80}ms` }}
             >
               <span className="ui-card__cat">{w.year}</span>

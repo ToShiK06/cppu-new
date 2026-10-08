@@ -66,7 +66,7 @@ export default function VacanciesPage() {
         {vacancies.map((v, i) => (
           <div
             key={v.id}
-            className="vacancy reveal"
+            className="vacancy ui-card tilt reveal"
             style={{ transitionDelay: `${i * 80}ms` }}
           >
             <h3 className="vacancy__title">{v.title}</h3>
@@ -98,7 +98,7 @@ export default function VacanciesPage() {
           </div>
         ))}
 
-        <div className="vacancy-form reveal">
+        <div className="vacancy-form tilt reveal">
           <h3>Отправить резюме</h3>
           <form onSubmit={handleSubmit} noValidate>
             <div>

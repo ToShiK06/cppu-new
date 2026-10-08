@@ -269,3 +269,28 @@ select.input {
     font-size: 17px;
   }
 }
+html {
+  scroll-behavior: smooth;
+}
+
+.tilt {
+  transition: transform .4s cubic-bezier(.2, .8, .2, 1), box-shadow .25s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), #ffb060);
+  z-index: 200;
+  transition: width .1s linear;
+  box-shadow: 0 0 12px rgba(255, 90, 31, 0.6);
+  pointer-events: none;
+}
+.magnetic {
+  will-change: transform;
+  backface-visibility: hidden;
+}

@@ -69,7 +69,7 @@ export default function ServiceDetailPage() {
             {detail?.sections?.map((s, i) => (
               <div
                 key={i}
-                className="detail__section reveal"
+                className="detail__section tilt reveal"
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
                 <h3 className="detail__sub">{s.title}</h3>
@@ -80,7 +80,7 @@ export default function ServiceDetailPage() {
             ))}
           </div>
 
-          <aside className="detail__aside reveal-right">
+          <aside className="detail__aside tilt reveal-right">
             <h3>Оставить заявку</h3>
             <p>{company.address}</p>
             {company.phones.map((p) => (

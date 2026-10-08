@@ -41,12 +41,15 @@ export default function Training() {
   return (
     <section className="section" id="training">
       <div className="container">
-        <SectionTitle
-          title="Обучение ДПО"
-          subtitle="Охрана труда и обучение мерам пожарной безопасности"
-        />
+        <div className="reveal">
+          <SectionTitle
+            title="Обучение ДПО"
+            subtitle="Охрана труда и обучение мерам пожарной безопасности"
+          />
+        </div>
+
         <div className="training reveal">
-          <div className="training__info">
+          <div className="training__info ui-card ui-card--accent tilt">
             <div className="training__badge">{trainingCourse.hours}</div>
             <h3 className="training__heading">
               Два курса за {trainingCourse.fullPrice} рублей
@@ -63,7 +66,8 @@ export default function Training() {
               Результат обучения: удостоверения по «Охране труда» и «Обучению мерам пожарной безопасности».
             </p>
           </div>
-          <form className="training__form" onSubmit={handleSubmit} noValidate>
+
+          <form className="training__form tilt" onSubmit={handleSubmit} noValidate>
             <h3>Оставить заявку на обучение</h3>
 
             <div>
@@ -95,9 +99,15 @@ export default function Training() {
               <input type="checkbox" required />
               <span>Даю согласие на обработку персональных данных</span>
             </label>
+
             <Button type="submit" block>Оставить заявку</Button>
-            {status === "success" && <p className="form-success">Заявка отправлена. Мы свяжемся с вами.</p>}
-            {status === "error" && <p className="form-error">Ошибка отправки. Попробуйте позже.</p>}
+
+            {status === "success" && (
+              <p className="form-success">Заявка отправлена. Мы свяжемся с вами.</p>
+            )}
+            {status === "error" && (
+              <p className="form-error">Ошибка отправки. Попробуйте позже.</p>
+            )}
           </form>
         </div>
       </div>

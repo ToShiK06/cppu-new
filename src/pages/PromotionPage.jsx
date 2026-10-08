@@ -3,6 +3,8 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { getPromotionBySlug } from "../data/promotions";
 import { company } from "../data/company";
 import { setMeta } from "../utils/seo";
+import SparksBackground from "../components/ui/SparksBackground";
+import FlameBackground from "../components/ui/FlameBackground";
 import "./PromotionPage.css";
 
 export default function PromotionPage() {
@@ -18,8 +20,11 @@ export default function PromotionPage() {
   if (!promo) return <Navigate to="/" replace />;
 
   return (
-    <section className="section">
-      <div className="container">
+    <div className="promotion-page">
+      <FlameBackground />
+      <SparksBackground count={90} />
+
+      <div className="container promotion-page__inner">
         <Link to="/" className="back-link reveal">← На главную</Link>
 
         <div className="promo-page">
@@ -32,9 +37,13 @@ export default function PromotionPage() {
               <h3 className="promo-page__sub reveal">Условия акции</h3>
               <ol className="promo-page__steps">
                 {promo.steps.map((s, i) => (
-                  <li key={i} className="reveal" style={{ transitionDelay: `${i * 80}ms` }}>
+                  <li
+                    key={i}
+                    className="ui-card tilt reveal"
+                    style={{ transitionDelay: `${i * 80}ms` }}
+                  >
                     <span className="promo-page__num">{i + 1}</span>
-                    {s}
+                    <span>{s}</span>
                   </li>
                 ))}
               </ol>
@@ -42,19 +51,21 @@ export default function PromotionPage() {
           )}
 
           {promo.notes && (
-            <ul className="promo-page__notes reveal">
+            <ul className="promo-page__notes ui-card tilt reveal">
               {promo.notes.map((n, i) => <li key={i}>{n}</li>)}
             </ul>
           )}
 
           <div className="promo-page__cta reveal">
-            <Link to="/contacts" className="btn btn--primary">Подать заявку на участие</Link>
+            <Link to="/contacts" className="btn btn--primary magnetic">
+              Подать заявку на участие
+            </Link>
             <span className="promo-page__phone">
               {company.phones[0]} · {company.email}
             </span>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

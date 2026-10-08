@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
 import { promotions } from "../../data/promotions";
 import SectionTitle from "../ui/SectionTitle";
-import heroBg from "../../assets/images/hero-bg.jpg";
+import SparksBackground from "../ui/SparksBackground";
+import FlameBackground from "../ui/FlameBackground";
 import "./Promotions.css";
 
 export default function Promotions() {
   return (
-    <section
-      className="section promotions-section"
-      id="promotions"
-      style={{ backgroundImage: `url(${heroBg})` }}
-    >
+    <section className="section promotions-section" id="promotions">
+      <FlameBackground />
+      <SparksBackground count={80} />
+
       <div className="container promotions-section__inner">
         <div className="reveal">
           <SectionTitle title="Акции" subtitle="Специальные предложения для наших клиентов" />
@@ -20,7 +20,7 @@ export default function Promotions() {
             <Link
               key={p.id}
               to={`/promotions/${p.slug}`}
-              className="ui-card ui-card--accent reveal"
+              className="ui-card ui-card--accent tilt reveal"
               style={{ transitionDelay: `${i * 90}ms` }}
             >
               <span className="ui-card__cat">{p.highlight}</span>

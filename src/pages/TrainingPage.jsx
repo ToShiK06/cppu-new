@@ -29,7 +29,7 @@ export default function TrainingPage() {
         </div>
 
         <div className="training-grid">
-          <div className="dpo-card dpo-card--accent reveal" style={{ transitionDelay: "0ms" }}>
+          <div className="dpo-card dpo-card--accent tilt reveal" style={{ transitionDelay: "0ms" }}>
             <div className="dpo-card__badge">{trainingCourse.hours}</div>
             <h3 className="dpo-card__title">
               Два курса за {trainingCourse.fullPrice} ₽
@@ -45,7 +45,7 @@ export default function TrainingPage() {
             </ul>
           </div>
 
-          <div className="dpo-card reveal" style={{ transitionDelay: "80ms" }}>
+          <div className="dpo-card tilt reveal" style={{ transitionDelay: "80ms" }}>
             <div className="dpo-card__icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
@@ -63,7 +63,7 @@ export default function TrainingPage() {
             </ul>
           </div>
 
-          <div className="dpo-card reveal" style={{ transitionDelay: "160ms" }}>
+          <div className="dpo-card tilt reveal" style={{ transitionDelay: "160ms" }}>
             <div className="dpo-card__icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -80,7 +80,7 @@ export default function TrainingPage() {
             </ul>
           </div>
 
-          <div className="dpo-card reveal" style={{ transitionDelay: "240ms" }}>
+          <div className="dpo-card tilt reveal" style={{ transitionDelay: "240ms" }}>
             <div className="dpo-card__icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
@@ -101,15 +101,15 @@ export default function TrainingPage() {
           {trainingCourse.lecturers.map((l, i) => (
             <div
               key={l.name}
-              className="lecturer-card reveal"
+              className="ui-card tilt reveal"
               style={{ transitionDelay: `${i * 80}ms` }}
             >
-              <div className="lecturer-card__avatar">
+              <div className="lecturer-avatar">
                 {l.name.split(" ").map((w) => w[0]).slice(0, 2).join("")}
               </div>
-              <h3 className="lecturer-card__name">{l.name}</h3>
-              <p className="lecturer-card__role">{l.role}</p>
-              <p className="lecturer-card__bio">{l.bio}</p>
+              <h3 className="ui-card__title">{l.name}</h3>
+              <span className="ui-card__cat" style={{ marginTop: -4 }}>{l.role}</span>
+              <p className="ui-card__text">{l.bio}</p>
             </div>
           ))}
         </div>

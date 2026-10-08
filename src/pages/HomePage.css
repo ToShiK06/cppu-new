@@ -12,3 +12,12 @@
   position: relative;
   z-index: 1;
 }
+.home-page__content {
+  position: relative;
+  z-index: 1;
+  scroll-snap-type: y proximity;
+}
+
+.home-page__content > section {
+  scroll-snap-align: start;
+}

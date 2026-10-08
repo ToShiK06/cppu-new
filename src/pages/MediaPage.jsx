@@ -39,7 +39,7 @@ export default function MediaPage() {
             return (
               <article
                 key={m.id}
-                className="media-card reveal"
+                className="media-card ui-card tilt reveal"
                 style={{ transitionDelay: `${i * 100}ms` }}
               >
                 {imageSrc && (
