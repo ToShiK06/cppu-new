@@ -3,14 +3,18 @@ import SectionTitle from "../components/ui/SectionTitle";
 import Breadcrumbs from "../components/ui/Breadcrumbs";
 import { company } from "../data/company";
 import { setMeta, pageMeta } from "../utils/seo";
+import fonBg from "../assets/images/fon.jpg";
 import "./AboutPage.css";
 
 export default function AboutPage() {
   useEffect(() => setMeta(pageMeta.about), []);
 
   return (
-    <section className="section">
-      <div className="container">
+    <div
+      className="about-page"
+      style={{ backgroundImage: `url(${fonBg})` }}
+    >
+      <div className="container about-page__inner">
         <div className="reveal">
           <Breadcrumbs items={[{ label: "Главная", to: "/" }, { label: "О компании" }]} />
           <SectionTitle
@@ -55,6 +59,6 @@ export default function AboutPage() {
           </aside>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
