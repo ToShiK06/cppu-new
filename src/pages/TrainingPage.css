@@ -1,3 +1,17 @@
+.training-page {
+  position: relative;
+  min-height: 100vh;
+  background: var(--bg);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.training-page__inner {
+  position: relative;
+  z-index: 1;
+  padding: 48px 0 96px;
+}
+
 .training-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

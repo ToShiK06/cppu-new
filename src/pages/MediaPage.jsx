@@ -4,6 +4,7 @@ import Breadcrumbs from "../components/ui/Breadcrumbs";
 import { mediaItems } from "../data/media";
 import { setMeta } from "../utils/seo";
 import smartWatt from "../assets/images/media/smart-watt.png";
+import mediaBg from "../assets/images/media.jpg";
 import "./MediaPage.css";
 
 const imageMap = {
@@ -19,8 +20,11 @@ export default function MediaPage() {
   }, []);
 
   return (
-    <section className="section">
-      <div className="container">
+    <div
+      className="media-page"
+      style={{ backgroundImage: `url(${mediaBg})` }}
+    >
+      <div className="container media-page__inner">
         <div className="reveal">
           <Breadcrumbs items={[{ label: "Главная", to: "/" }, { label: "Медиа" }]} />
           <SectionTitle title="Медиа" subtitle="Новости, партнёры и события компании" />
@@ -77,6 +81,6 @@ export default function MediaPage() {
           })}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

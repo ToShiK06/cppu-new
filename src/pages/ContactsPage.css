@@ -1,9 +1,43 @@
+/* Страница контактов с фоновым изображением */
+.contacts-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 48px 0 96px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Лёгкое затемнение поверх фото */
+.contacts-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(13, 17, 23, 0.65) 0%,
+    rgba(13, 17, 23, 0.5) 40%,
+    rgba(13, 17, 23, 0.75) 100%
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+.contacts-page__inner {
+  position: relative;
+  z-index: 1;
+}
+
 .contacts-page__info {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 32px;
   margin-bottom: 48px;
 }
+
 .contacts-page__col h4 {
   font-size: 14px;
   color: var(--accent);
@@ -11,13 +45,61 @@
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+
 .contacts-page__col p,
 .contacts-page__col a {
   display: block;
   font-size: 16px;
   margin-bottom: 6px;
+  color: var(--text);
 }
+
 .contacts-page__muted {
   color: var(--muted);
   font-size: 14px;
+}
+
+.contacts-page__map {
+  margin-top: 24px;
+}
+
+/* Секция с формой — тем же фоном, но без нового фото */
+.contacts-page__form-section {
+  position: relative;
+  z-index: 1;
+  margin-top: 64px;
+}
+
+/* Карточки контактов и форма — полупрозрачные, чтобы фон просвечивал */
+.contacts-page .contacts__form,
+.contacts-page .contacts__item {
+  background: rgba(22, 27, 34, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(48, 54, 61, 0.9);
+  border-radius: var(--radius);
+}
+
+.contacts-page .contacts__item {
+  padding: 20px;
+  margin-bottom: 12px;
+}
+
+.contacts-page .contacts__form {
+  padding: 32px;
+}
+
+/* Мобильные */
+@media (max-width: 900px) {
+  .contacts-page {
+    background-attachment: scroll;
+    padding: 32px 0 64px;
+  }
+  .contacts-page__info {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .contacts-page__form-section {
+    margin-top: 40px;
+  }
 }

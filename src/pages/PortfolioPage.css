@@ -1,0 +1,35 @@
+.portfolio-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 48px 0 96px;
+  background: var(--bg);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.portfolio-page__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.portfolio-page .work {
+  background: rgba(22, 27, 34, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(48, 54, 61, 0.9);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: border-color .25s ease, transform .25s ease, background .25s ease;
+}
+
+.portfolio-page .work:hover {
+  border-color: var(--accent);
+  background: rgba(22, 27, 34, 0.9);
+  transform: translateY(-4px);
+}
+
+@media (max-width: 900px) {
+  .portfolio-page {
+    padding: 32px 0 64px;
+  }
+}

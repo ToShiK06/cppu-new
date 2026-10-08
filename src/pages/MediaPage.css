@@ -1,3 +1,36 @@
+/* Страница медиа с фоновым изображением */
+.media-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 48px 0 96px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Лёгкое затемнение поверх фото */
+.media-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(13, 17, 23, 0.65) 0%,
+    rgba(13, 17, 23, 0.5) 40%,
+    rgba(13, 17, 23, 0.75) 100%
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+.media-page__inner {
+  position: relative;
+  z-index: 1;
+}
+
 .media__empty {
   color: var(--muted);
   text-align: center;
@@ -10,18 +43,22 @@
   gap: 32px;
 }
 
+/* Карточка медиа — полупрозрачная, с блюром */
 .media-card {
   display: grid;
   grid-template-columns: 360px 1fr;
   gap: 32px;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: rgba(22, 27, 34, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(48, 54, 61, 0.9);
   border-radius: var(--radius);
   padding: 24px;
-  transition: border-color .25s ease, transform .25s ease;
+  transition: border-color .25s ease, transform .25s ease, background .25s ease;
 }
 .media-card:hover {
   border-color: var(--accent);
+  background: rgba(22, 27, 34, 0.8);
   transform: translateY(-2px);
 }
 
@@ -75,6 +112,7 @@
   font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.3px;
+  color: var(--text);
 }
 
 .media-card__short {
@@ -96,7 +134,7 @@
   align-items: center;
   gap: 16px;
   padding: 12px 16px;
-  background: var(--bg);
+  background: rgba(13, 17, 23, 0.7);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   font-size: 14px;
@@ -118,6 +156,10 @@
 
 /* Планшет */
 @media (max-width: 900px) {
+  .media-page {
+    background-attachment: scroll;
+    padding: 32px 0 64px;
+  }
   .media-card {
     grid-template-columns: 1fr;
     gap: 20px;

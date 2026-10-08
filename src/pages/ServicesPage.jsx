@@ -4,8 +4,9 @@ import { useServices } from "../hooks/useServices";
 import SectionTitle from "../components/ui/SectionTitle";
 import Breadcrumbs from "../components/ui/Breadcrumbs";
 import Button from "../components/ui/Button";
+import SparksBackground from "../components/ui/SparksBackground";
+import FlameBackground from "../components/ui/FlameBackground";
 import { setMeta, pageMeta } from "../utils/seo";
-import servicesBg from "../assets/images/services-bg.jpg";
 import "./ServicesPage.css";
 
 const PAGE_SIZE = 6;
@@ -25,10 +26,10 @@ export default function ServicesPage() {
   const hasMore = visibleCount < services.length;
 
   return (
-    <div
-      className="services-page"
-      style={{ backgroundImage: `url(${servicesBg})` }}
-    >
+    <div className="services-page">
+      <FlameBackground />
+      <SparksBackground count={100} />
+
       <div className="container services-page__inner">
         <div className="reveal">
           <Breadcrumbs items={[{ label: "Главная", to: "/" }, { label: "Услуги" }]} />

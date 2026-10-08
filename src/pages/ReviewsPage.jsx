@@ -4,6 +4,8 @@ import Breadcrumbs from "../components/ui/Breadcrumbs";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 import Loader from "../components/ui/Loader";
+import SparksBackground from "../components/ui/SparksBackground";
+import FlameBackground from "../components/ui/FlameBackground";
 import { getReviews, submitReview } from "../services/firestore";
 import { setMeta } from "../utils/seo";
 import "./ReviewsPage.css";
@@ -40,8 +42,11 @@ export default function ReviewsPage() {
   };
 
   return (
-    <section className="section">
-      <div className="container">
+    <div className="reviews-page">
+      <FlameBackground />
+      <SparksBackground count={100} />
+
+      <div className="container reviews-page__inner">
         <div className="reveal">
           <Breadcrumbs items={[{ label: "Главная", to: "/" }, { label: "Отзывы" }]} />
           <SectionTitle title="Отзывы" subtitle="Что говорят о нас клиенты" />
@@ -93,6 +98,6 @@ export default function ReviewsPage() {
           </form>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

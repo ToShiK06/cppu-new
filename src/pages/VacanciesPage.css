@@ -1,25 +1,66 @@
+/* Страница вакансий с фоновым изображением */
+.vacancies-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 48px 0 96px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Лёгкое затемнение поверх фото */
+.vacancies-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(13, 17, 23, 0.65) 0%,
+    rgba(13, 17, 23, 0.5) 40%,
+    rgba(13, 17, 23, 0.75) 100%
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+.vacancies-page__inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* Карточки вакансий — полупрозрачные, с блюром */
 .vacancy {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: rgba(22, 27, 34, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(48, 54, 61, 0.9);
   border-radius: var(--radius);
   padding: 32px;
   margin-bottom: 24px;
 }
+
 .vacancy__title {
   font-size: 24px;
   margin-bottom: 24px;
+  color: var(--text);
 }
+
 .vacancy__cols {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
   margin-bottom: 24px;
 }
+
 .vacancy__cols h4 {
   font-size: 15px;
   margin-bottom: 12px;
   color: var(--accent);
 }
+
 .vacancy__cols li {
   color: var(--muted);
   font-size: 14px;
@@ -36,6 +77,7 @@
   border-radius: 50%;
   background: var(--accent);
 }
+
 .vacancy__contacts {
   border-top: 1px solid var(--border);
   padding-top: 20px;
@@ -45,9 +87,13 @@
 .vacancy__contacts a {
   color: var(--accent);
 }
+
+/* Форма резюме — полупрозрачная */
 .vacancy-form {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: rgba(22, 27, 34, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(48, 54, 61, 0.9);
   border-radius: var(--radius);
   padding: 32px;
   max-width: 560px;
@@ -59,15 +105,27 @@
 .vacancy-form h3 {
   font-size: 20px;
   margin-bottom: 8px;
+  color: var(--text);
 }
 .vacancy-form form {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
+
+/* Мобильные */
 @media (max-width: 900px) {
+  .vacancies-page {
+    background-attachment: scroll;
+  }
   .vacancy__cols {
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+  .vacancy {
+    padding: 24px;
+  }
+  .vacancy-form {
+    padding: 24px;
   }
 }

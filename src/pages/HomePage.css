@@ -1,0 +1,14 @@
+/* Главная страница — тёмный фон + искры */
+.home-page {
+  position: relative;
+  min-height: 100vh;
+  background: var(--bg);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Контент поверх искр, чтобы они просвечивали только между секциями */
+.home-page__content {
+  position: relative;
+  z-index: 1;
+}

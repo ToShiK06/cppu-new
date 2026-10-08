@@ -8,6 +8,7 @@ import { vacancies } from "../data/vacancies";
 import { submitLead } from "../services/firestore";
 import { isValidPhone } from "../utils/phone";
 import { setMeta } from "../utils/seo";
+import workBg from "../assets/images/work.jpg";
 import "./VacanciesPage.css";
 
 export default function VacanciesPage() {
@@ -49,8 +50,11 @@ export default function VacanciesPage() {
   };
 
   return (
-    <section className="section">
-      <div className="container">
+    <div
+      className="vacancies-page"
+      style={{ backgroundImage: `url(${workBg})` }}
+    >
+      <div className="container vacancies-page__inner">
         <div className="reveal">
           <Breadcrumbs items={[{ label: "Главная", to: "/" }, { label: "Вакансии" }]} />
           <SectionTitle
@@ -137,6 +141,6 @@ export default function VacanciesPage() {
           </form>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
