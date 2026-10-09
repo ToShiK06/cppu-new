@@ -1,4 +1,4 @@
-/* Страница медиа — тёмный фон + искры */
+/* Страница медиа — тёмный фон + пламя + искры */
 .media-page {
   position: relative;
   min-height: 100vh;
@@ -22,23 +22,50 @@
 .media-list {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
-/* ============================================================
-   Карточка медиа — двухколоночная на десктопе
-   ============================================================ */
+/* Карточка — слева фото, справа текст */
 .media-card {
   display: grid;
-  grid-template-columns: 320px 1fr;
+  grid-template-columns: 300px 1fr;
   gap: 28px;
   padding: 24px;
   align-items: start;
+  background: rgba(22, 27, 34, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .25s ease, background .25s ease;
 }
 
-/* Сбрасываем flex-поведение ui-card, чтобы grid работал правильно */
-.media-card.ui-card {
-  display: grid;
+.media-card:hover {
+  border-color: rgba(255, 90, 31, 0.5);
+  background: rgba(22, 27, 34, 0.85);
+}
+
+/* Оранжевая полоска сверху */
+.media-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), rgba(255, 90, 31, 0.15));
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s cubic-bezier(.2, .8, .2, 1);
+}
+
+.media-card:hover::before {
+  transform: scaleX(1);
 }
 
 .media-card__image {
@@ -49,12 +76,14 @@
   background: var(--surface-2);
   align-self: start;
 }
+
 .media-card__image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform .4s ease;
 }
+
 .media-card:hover .media-card__image img {
   transform: scale(1.04);
 }
@@ -72,11 +101,13 @@
   align-items: center;
   flex-wrap: wrap;
 }
+
 .media-card__date {
   font-size: 12px;
   color: var(--muted);
   letter-spacing: 1px;
 }
+
 .media-card__tag {
   font-size: 11px;
   font-weight: 600;
@@ -122,25 +153,29 @@
   color: var(--text);
   transition: all .2s ease;
 }
+
 .media-card__link:hover {
   border-color: var(--accent);
   color: var(--accent);
 }
+
 .media-card__link-arrow {
   color: var(--accent);
   font-size: 16px;
   transition: transform .2s ease;
 }
+
 .media-card__link:hover .media-card__link-arrow {
   transform: translateX(4px);
 }
 
-/* ============================================================
-   Планшет (≤ 900px) — карточка в одну колонку
-   ============================================================ */
+/* Планшет */
 @media (max-width: 900px) {
   .media-page {
     padding: 32px 0 64px;
+  }
+  .media-list {
+    max-width: 100%;
   }
   .media-card {
     grid-template-columns: 1fr;
@@ -155,9 +190,7 @@
   }
 }
 
-/* ============================================================
-   Мобильные (≤ 520px)
-   ============================================================ */
+/* Мобильные */
 @media (max-width: 520px) {
   .media-card {
     padding: 16px;

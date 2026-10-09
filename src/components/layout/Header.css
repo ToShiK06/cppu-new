@@ -2,16 +2,24 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(13, 17, 23, 0.88);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border);
+  background: rgba(13, 17, 23, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(48, 54, 61, 0.6);
+  transition: background .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+
+.header.is-scrolled {
+  background: rgba(13, 17, 23, 0.92);
+  border-bottom-color: rgba(48, 54, 61, 0.95);
+  box-shadow: 0 8px 30px -20px rgba(0, 0, 0, 0.8);
 }
 
 .header__inner {
-  height: 76px;
+  height: 78px;
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 32px;
   min-width: 0;
 }
 
@@ -21,88 +29,126 @@
   flex-direction: column;
   line-height: 1.1;
   flex-shrink: 0;
+  transition: transform .25s ease;
+}
+.header__logo:hover {
+  transform: translateY(-1px);
 }
 .header__logo-mark {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 800;
   letter-spacing: 3px;
   color: var(--accent);
+  transition: text-shadow .3s ease;
+}
+.header__logo:hover .header__logo-mark {
+  text-shadow: 0 0 20px rgba(255, 90, 31, 0.55);
 }
 .header__logo-sub {
   font-size: 10px;
   color: var(--muted);
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
 /* ---- Навигация ---- */
 .header__nav {
   display: flex;
-  gap: 20px;
+  gap: 22px;
   margin-left: auto;
   min-width: 0;
-  flex-wrap: nowrap;
 }
+
 .header__link {
-  font-size: 14px;
-  color: var(--muted);
-  font-weight: 500;
   position: relative;
-  padding: 4px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  padding: 6px 0;
   white-space: nowrap;
-  transition: color .2s ease;
+  transition: color .25s ease;
 }
-.header__link:hover,
-.header__link.is-active {
-  color: var(--text);
-}
-.header__link.is-active::after,
-.header__link:hover::after {
+.header__link::after {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -6px;
+  bottom: -4px;
   height: 2px;
   background: var(--accent);
   border-radius: 2px;
-  animation: fadeIn .25s ease both;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s cubic-bezier(.2, .8, .2, 1);
+}
+.header__link:hover {
+  color: var(--text);
+}
+.header__link:hover::after {
+  transform: scaleX(1);
+}
+.header__link.is-active {
+  color: var(--text);
+}
+.header__link.is-active::after {
+  transform: scaleX(1);
 }
 
 /* ---- Действия справа ---- */
 .header__actions {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 18px;
   flex-shrink: 0;
-  margin-left: 20px;
+  margin-left: 24px;
 }
+
 .header__phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-weight: 600;
   font-size: 14px;
   white-space: nowrap;
   color: var(--text);
-  transition: color .2s;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  transition: all .25s ease;
+}
+.header__phone svg {
+  color: var(--accent);
+  flex-shrink: 0;
 }
 .header__phone:hover {
   color: var(--accent);
+  background: rgba(255, 90, 31, 0.08);
 }
 
 /* ---- Бургер ---- */
 .header__burger {
   display: none;
   flex-direction: column;
+  justify-content: center;
   gap: 5px;
-  padding: 8px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: var(--radius-sm);
+  transition: background .2s ease;
   flex-shrink: 0;
 }
+.header__burger:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
 .header__burger span {
+  display: block;
   width: 22px;
   height: 2px;
   background: var(--text);
   border-radius: 2px;
-  transition: transform .25s ease, opacity .25s ease;
+  margin: 0 auto;
+  transition: transform .3s cubic-bezier(.2, .8, .2, 1), opacity .25s ease;
 }
 .header__burger.is-open span:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
@@ -119,119 +165,118 @@
 }
 
 /* ============================================================
-   Пошаговое сжатие — 9 пунктов меню должны влезать до 1100px
+   Адаптив
    ============================================================ */
 
-/* 1800px и ниже — чуть сжимаем */
-@media (max-width: 1800px) {
-  .header__inner { gap: 24px; }
+@media (max-width: 1400px) {
+  .header__inner { gap: 22px; }
   .header__nav { gap: 18px; }
   .header__actions { margin-left: 16px; }
 }
 
-/* 1600px и ниже */
-@media (max-width: 1600px) {
-  .header__inner { gap: 20px; }
-  .header__nav { gap: 16px; }
-  .header__link { font-size: 13px; }
-  .header__phone { font-size: 13px; }
-  .header__actions { gap: 12px; margin-left: 14px; }
-}
-
-/* 1440px и ниже */
-@media (max-width: 1440px) {
+@media (max-width: 1280px) {
   .header__inner { gap: 16px; }
   .header__nav { gap: 14px; }
-  .header__link { font-size: 12.5px; }
-  .header__logo-mark { font-size: 20px; letter-spacing: 2px; }
-  .header__logo-sub { font-size: 9px; }
-  .header__actions { margin-left: 12px; }
+  .header__link { font-size: 13px; }
+  .header__phone { font-size: 13px; padding: 6px 10px; }
+  .header__actions { gap: 12px; margin-left: 12px; }
 }
 
-/* 1320px и ниже — убираем подпись логотипа */
-@media (max-width: 1320px) {
-  .header__nav { gap: 12px; }
-  .header__link { font-size: 12px; }
-  .header__logo-sub { display: none; }
-  .header__phone { font-size: 12.5px; }
-}
-
-/* 1240px и ниже — ещё плотнее */
-@media (max-width: 1240px) {
-  .header__inner { gap: 14px; }
-  .header__nav { gap: 10px; }
-  .header__link { font-size: 11.5px; }
-  .header__actions { margin-left: 10px; gap: 10px; }
-}
-
-/* 1180px и ниже — компактная кнопка */
-@media (max-width: 1180px) {
-  .header__nav { gap: 9px; }
-  .header__link { font-size: 11px; }
-  .header__phone { font-size: 12px; }
-}
-
-/* Ниже 1100px — бургер */
-@media (max-width: 1100px) {
+/* Ниже 1140px — бургер */
+@media (max-width: 1140px) {
   .header__nav {
     position: fixed;
-    top: 76px;
+    top: 78px;
     left: 0;
     right: 0;
-    background: var(--surface);
+    background: rgba(13, 17, 23, 0.98);
+    backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
     flex-direction: column;
-    gap: 4px;
-    padding: 20px 24px 28px;
+    gap: 0;
+    padding: 24px;
     margin: 0;
-    transform: translateY(-140%);
-    transition: transform .3s ease;
-    box-shadow: var(--shadow);
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .4s cubic-bezier(.2, .8, .2, 1), opacity .3s ease;
+    box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.8);
     z-index: 99;
     overflow-y: auto;
-    max-height: calc(100vh - 76px);
+    max-height: calc(100vh - 78px);
   }
   .header__nav.is-open {
     transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
   }
+
   .header__link {
     font-size: 16px;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(48, 54, 61, 0.6);
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: transform .4s cubic-bezier(.2, .8, .2, 1),
+                opacity .4s ease,
+                color .2s ease;
   }
-  .header__link.is-active::after,
-  .header__link:hover::after {
+  .header__nav.is-open .header__link {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .header__link::after {
     display: none;
   }
   .header__link:last-of-type {
     border-bottom: none;
   }
+  .header__link.is-active {
+    color: var(--accent);
+    padding-left: 12px;
+  }
+  .header__link.is-active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 20px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
   .header__actions {
     margin-left: auto;
-    gap: 12px;
+    gap: 10px;
   }
-  .header__phone {
+  .header__actions .header__phone {
     display: none;
   }
   .header__burger {
     display: flex;
   }
+
   .header__mobile-extra {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin-top: 16px;
-    padding-top: 16px;
+    margin-top: 24px;
+    padding-top: 24px;
     border-top: 1px solid var(--border);
   }
   .header__mobile-extra .header__phone {
-    display: block;
-    font-size: 18px;
+    display: inline-flex;
+    font-size: 16px;
+    padding: 12px 0;
+    background: transparent;
+    color: var(--text);
   }
   .header__mobile-extra .callback-btn {
     display: inline-flex;
     justify-content: center;
-    padding: 12px 20px;
+    padding: 14px 22px;
     font-size: 15px;
   }
 }
@@ -239,11 +284,18 @@
 @media (max-width: 720px) {
   .header__inner {
     height: 68px;
-    gap: 12px;
+    gap: 10px;
   }
   .header__nav {
     top: 68px;
     max-height: calc(100vh - 68px);
+    padding: 20px;
+  }
+  .header__logo-sub {
+    display: none;
+  }
+  .header__actions {
+    gap: 8px;
   }
   .header__actions .callback-btn {
     padding: 8px 14px;
@@ -251,19 +303,11 @@
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 480px) {
   .header__actions {
     display: none;
   }
   .header__burger {
     margin-left: auto;
   }
-}
-.header__link.is-active {
-  animation: navPulse 2.4s ease-in-out infinite;
-}
-
-@keyframes navPulse {
-  0%, 100% { text-shadow: 0 0 0 rgba(255, 90, 31, 0); }
-  50% { text-shadow: 0 0 14px rgba(255, 90, 31, 0.5); }
 }

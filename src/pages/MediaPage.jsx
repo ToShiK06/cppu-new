@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import SectionTitle from "../components/ui/SectionTitle";
 import Breadcrumbs from "../components/ui/Breadcrumbs";
+import SparksBackground from "../components/ui/SparksBackground";
+import FlameBackground from "../components/ui/FlameBackground";
 import { mediaItems } from "../data/media";
 import { setMeta } from "../utils/seo";
 import smartWatt from "../assets/images/media/smart-watt.png";
-import mediaBg from "../assets/images/media.jpg";
 import "./MediaPage.css";
 
 const imageMap = {
@@ -20,17 +21,19 @@ export default function MediaPage() {
   }, []);
 
   return (
-    <div
-      className="media-page"
-      style={{ backgroundImage: `url(${mediaBg})` }}
-    >
+    <div className="media-page">
+      <FlameBackground />
+      <SparksBackground count={90} />
+
       <div className="container media-page__inner">
         <div className="reveal">
           <Breadcrumbs items={[{ label: "Главная", to: "/" }, { label: "Медиа" }]} />
           <SectionTitle title="Медиа" subtitle="Новости, партнёры и события компании" />
         </div>
 
-        {mediaItems.length === 0 && <p className="media__empty">Пока нет публикаций.</p>}
+        {mediaItems.length === 0 && (
+          <p className="media__empty">Пока нет публикаций.</p>
+        )}
 
         <div className="media-list">
           {mediaItems.map((m, i) => {
@@ -39,7 +42,7 @@ export default function MediaPage() {
             return (
               <article
                 key={m.id}
-                className="media-card ui-card tilt reveal"
+                className="media-card reveal"
                 style={{ transitionDelay: `${i * 100}ms` }}
               >
                 {imageSrc && (
