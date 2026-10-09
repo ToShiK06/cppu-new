@@ -51,24 +51,41 @@
 }
 
 .booking__feature-icon {
+  position: relative;
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: rgba(255, 90, 31, 0.12);
-  border: 1px solid rgba(255, 90, 31, 0.25);
-  color: var(--accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all .3s ease;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 90, 31, 0.18) 0%,
+    rgba(255, 90, 31, 0.08) 100%
+  );
+  border: 1px solid rgba(255, 90, 31, 0.35);
+  color: #ff7a45;
+  transition: all .3s cubic-bezier(.2, .8, .2, 1);
+  box-shadow: 0 4px 12px -6px rgba(255, 90, 31, 0.5);
+}
+
+.booking__feature-icon svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 22px;
+  color: inherit;
+  stroke: currentColor;
+  fill: none;
+  pointer-events: none;
 }
 .booking__feature:hover .booking__feature-icon {
   background: var(--accent);
   color: #fff;
+  border-color: var(--accent);
   transform: rotate(-4deg) scale(1.05);
+  box-shadow: 0 8px 20px -6px rgba(255, 90, 31, 0.9);
 }
-
 .booking__feature strong {
   display: block;
   font-size: 15px;
