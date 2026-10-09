@@ -1,0 +1,103 @@
+.portfolio-detail-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 48px 0 96px;
+  background: var(--bg);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.portfolio-detail-page__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.portfolio-detail {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.portfolio-detail__main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Обложка: фон под тёмный, фото не обрезается */
+.portfolio-detail__cover {
+  position: relative;
+  width: 100%;
+  max-height: 640px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 90, 31, 0.06), transparent 70%),
+    var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.portfolio-detail__cover img {
+  display: block;
+  max-width: 100%;
+  max-height: 600px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.8);
+}
+
+/* Галерея — если будет несколько фото, идут сеткой ниже */
+.portfolio-detail__gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.portfolio-detail__gallery img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform .25s ease, border-color .25s ease;
+}
+
+.portfolio-detail__gallery img:hover {
+  transform: scale(1.03);
+  border-color: var(--accent);
+}
+
+/* Мобильные */
+@media (max-width: 900px) {
+  .portfolio-detail {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .portfolio-detail__cover {
+    max-height: 480px;
+    padding: 16px;
+  }
+  .portfolio-detail__cover img {
+    max-height: 440px;
+  }
+}
+
+@media (max-width: 520px) {
+  .portfolio-detail__cover {
+    max-height: 380px;
+    padding: 12px;
+    border-radius: var(--radius-sm);
+  }
+  .portfolio-detail__cover img {
+    max-height: 340px;
+  }
+}

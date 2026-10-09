@@ -160,3 +160,70 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Счётчик записей в табе */
+.admin__tab-count {
+  margin-left: 8px;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* Бейдж с количеством новых записей */
+.admin__tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  margin-left: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 100px;
+  animation: adminBadgePulse 2s ease-in-out infinite;
+}
+@keyframes adminBadgePulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 90, 31, 0.6); }
+  50% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(255, 90, 31, 0); }
+}
+
+/* Телефон в карточке — оранжевый, кликабельный */
+.admin-card__phone {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color .2s;
+}
+.admin-card__phone:hover {
+  text-decoration: underline;
+}
+
+.admin-card__link {
+  color: var(--accent);
+  text-decoration: none;
+}
+.admin-card__link:hover {
+  text-decoration: underline;
+}
+
+/* Статус "опубликован" для отзывов */
+.admin-card__status.status--published {
+  background: rgba(63, 185, 80, 0.15);
+  color: var(--success);
+}
+.admin-card__status.status--hidden {
+  background: rgba(139, 148, 158, 0.15);
+  color: var(--muted);
+}
+
+/* Табы — если не помещаются, переносим */
+.admin__tabs {
+  flex-wrap: wrap;
+}
+
+/* Небольшой фикс отступов между кнопками действий */
+.admin-card__actions button {
+  white-space: nowrap;
+}

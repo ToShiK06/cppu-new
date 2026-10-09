@@ -1,36 +1,58 @@
+import { Link } from "react-router-dom";
 import SectionTitle from "../ui/SectionTitle";
+import { portfolioWorks } from "../../data/portfolio";
+import { getPortfolioImage } from "../../utils/portfolioImages";
 import "./Portfolio.css";
 
-const works = [
-  { title: "ТЦ «Волна»", text: "Монтаж пожарной сигнализации и оповещения", year: 2024 },
-  { title: "Школа №14", text: "Огнезащитная обработка и планы эвакуации", year: 2023 },
-  { title: "Бизнес-центр «Славянский»", text: "АУПТ и противопожарный водопровод", year: 2024 },
-  { title: "Завод «Планета»", text: "Расчёт категорий и пожарный аудит", year: 2023 },
-  { title: "Отель «Интурист»", text: "Обслуживание пожарной сигнализации", year: 2024 },
-  { title: "Склад «Логопарк»", text: "Противопожарные двери и ворота", year: 2023 },
-];
-
 export default function Portfolio({ limit }) {
-  const list = limit ? works.slice(0, limit) : works;
+  const list = limit ? portfolioWorks.slice(0, limit) : portfolioWorks;
+
   return (
     <section className="section" id="portfolio">
       <div className="container">
         <div className="reveal">
-          <SectionTitle title="Выполненные работы" subtitle="Объекты, на которых мы работали" />
+          <SectionTitle
+            title="Выполненные работы"
+            subtitle="Объекты, на которых мы работали"
+          />
         </div>
-        <div className="grid">
-          {list.map((w, i) => (
-            <div
-              key={w.title}
-              className="ui-card tilt reveal"
-              style={{ transitionDelay: `${i * 80}ms` }}
-            >
-              <span className="ui-card__cat">{w.year}</span>
-              <h3 className="ui-card__title">{w.title}</h3>
-              <p className="ui-card__text">{w.text}</p>
-            </div>
-          ))}
+
+        <div className="portfolio-grid">
+          {list.map((w, i) => {
+            const cover = getPortfolioImage(w.cover);
+            return (
+              <Link
+                key={w.slug}
+                to={`/portfolio/${w.slug}`}
+                className="portfolio-card ui-card tilt reveal"
+                style={{ transitionDelay: `${(i % 6) * 70}ms` }}
+              >
+                {cover && (
+                  <div className="portfolio-card__cover">
+                    <img src={cover} alt={w.title} loading="lazy" />
+                  </div>
+                )}
+                <div className="portfolio-card__body">
+                  <div className="portfolio-card__meta">
+                    <span className="ui-card__cat">{w.city}</span>
+                    <span className="portfolio-card__year">{w.year}</span>
+                  </div>
+                  <h3 className="ui-card__title">{w.title}</h3>
+                  <p className="ui-card__text">{w.short}</p>
+                </div>
+                <span className="ui-card__arrow portfolio-card__arrow">→</span>
+              </Link>
+            );
+          })}
         </div>
+
+        {limit && limit < portfolioWorks.length && (
+          <div style={{ textAlign: "center", marginTop: 48 }} className="reveal">
+            <Link to="/portfolio" className="btn btn--ghost">
+              Все работы
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

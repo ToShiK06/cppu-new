@@ -15,6 +15,7 @@ import MediaPage from "./pages/MediaPage";
 import ReviewsPage from "./pages/ReviewsPage";
 import AdminPage from "./pages/AdminPage";
 import AIAssistant from "./components/ai/AIAssistant";
+import PortfolioDetailPage from "./pages/PortfolioDetailPage";
 import "./App.css";
 
 export default function App() {
@@ -36,6 +37,7 @@ export default function App() {
           <Route path="/contacts" element={<ContactsPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/portfolio/:slug" element={<PortfolioDetailPage />} />
         </Routes>
       </Layout>
       <AIAssistant />

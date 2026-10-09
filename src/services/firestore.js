@@ -98,3 +98,36 @@ export function subscribeCallbacks(callback) {
     callback(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
   });
 }
+// ---------- Отзывы ----------
+export async function updateReviewStatus(id, status) {
+  return updateDoc(doc(db, "reviews", id), { status });
+}
+
+export async function deleteReview(id) {
+  return deleteDoc(doc(db, "reviews", id));
+}
+
+export function subscribeReviews(callback) {
+  const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"));
+  return onSnapshot(q, (snap) => {
+    callback(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
+  });
+}
+
+// ---------- Вакансии ----------
+export function subscribeVacancyLeads(callback) {
+  const q = query(collection(db, "leads"), orderBy("createdAt", "desc"));
+  return onSnapshot(q, (snap) => {
+    const all = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+    callback(all.filter((item) => item.type === "vacancy"));
+  });
+}
+
+// ---------- Тренировки (противопожарные) — если нужно ----------
+export async function updateTrainingStatus(id, status) {
+  return updateDoc(doc(db, "training_requests", id), { status });
+}
+
+export async function deleteTrainingRequest(id) {
+  return deleteDoc(doc(db, "training_requests", id));
+}

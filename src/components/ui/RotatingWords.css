@@ -1,0 +1,37 @@
+.rotating-words {
+  display: inline-block;
+  position: relative;
+  vertical-align: baseline;
+}
+
+.rotating-words__item {
+  display: inline-block;
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+}
+
+/* Видимое состояние — слово на своём месте */
+.rotating-words__item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity .6s cubic-bezier(.2, .8, .2, 1),
+    transform .6s cubic-bezier(.2, .8, .2, 1);
+}
+
+/* Скрытое состояние — слово ушло вверх и растворилось */
+.rotating-words__item.is-hidden {
+  opacity: 0;
+  transform: translateY(-30px);
+  transition:
+    opacity .4s cubic-bezier(.4, 0, 1, 1),
+    transform .4s cubic-bezier(.4, 0, 1, 1);
+}
+
+/* Уважение к prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .rotating-words__item {
+    transition: opacity .3s ease;
+    transform: none;
+  }
+}

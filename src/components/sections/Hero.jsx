@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Typewriter from "../ui/Typewriter";
+import RotatingWords from "../ui/RotatingWords";
 import SplitText from "../ui/SplitText";
 import Counter from "../ui/Counter";
 import MagneticButton from "../ui/MagneticButton";
@@ -45,7 +45,7 @@ export default function Hero() {
             <SplitText text="Комплексная защита" />
             <br />
             <span className="hero__accent">
-              <Typewriter
+              <RotatingWords
                 words={[
                   "вашего объекта",
                   "вашего бизнеса",
