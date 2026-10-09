@@ -1,0 +1,24 @@
+.calculator-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 48px 0 96px;
+  background: var(--bg);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.calculator-page__inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* Обнуляем лишний padding у секции внутри страницы */
+.calculator-page .calculator-section {
+  padding: 0;
+}
+
+@media (max-width: 720px) {
+  .calculator-page {
+    padding: 32px 0 64px;
+  }
+}

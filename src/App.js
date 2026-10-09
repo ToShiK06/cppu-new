@@ -17,6 +17,7 @@ import AdminPage from "./pages/AdminPage";
 import AIAssistant from "./components/ai/AIAssistant";
 import PortfolioDetailPage from "./pages/PortfolioDetailPage";
 import "./App.css";
+import CalculatorPage from "./pages/CalculatorPage";
 
 export default function App() {
   return (
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/contacts" element={<ContactsPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/calculator" element={<CalculatorPage />} />
           <Route path="/portfolio/:slug" element={<PortfolioDetailPage />} />
         </Routes>
       </Layout>

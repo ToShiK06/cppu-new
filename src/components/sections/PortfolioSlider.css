@@ -1,0 +1,307 @@
+.portfolio-slider-section {
+  position: relative;
+}
+
+.portfolio-slider {
+  position: relative;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+/* ---- Просмотрщик ---- */
+.portfolio-slider__viewport {
+  position: relative;
+  width: 100%;
+  height: 540px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.7);
+  isolation: isolate;
+}
+
+/* ---- Слайды ---- */
+.portfolio-slider__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(1.03);
+  transition:
+    opacity .8s cubic-bezier(.2, .8, .2, 1),
+    transform .8s cubic-bezier(.2, .8, .2, 1);
+  pointer-events: none;
+  text-decoration: none;
+  color: inherit;
+}
+
+.portfolio-slider__slide.is-active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+  z-index: 1;
+}
+
+/* ---- Изображение ---- */
+.portfolio-slider__image {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.portfolio-slider__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 8s ease;
+}
+.portfolio-slider__slide.is-active .portfolio-slider__image img {
+  transform: scale(1.06);
+}
+
+/* ---- Затемнение под текст ---- */
+.portfolio-slider__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(13, 17, 23, 0.92) 0%,
+    rgba(13, 17, 23, 0.7) 45%,
+    rgba(13, 17, 23, 0.35) 75%,
+    rgba(13, 17, 23, 0.15) 100%
+  );
+  z-index: 1;
+}
+
+/* ---- Текст ---- */
+.portfolio-slider__info {
+  position: absolute;
+  left: 48px;
+  bottom: 48px;
+  right: 40%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: var(--text);
+}
+
+.portfolio-slider__city {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 5px 12px;
+  background: rgba(255, 90, 31, 0.15);
+  border: 1px solid rgba(255, 90, 31, 0.35);
+  border-radius: 100px;
+}
+
+.portfolio-slider__title {
+  font-size: clamp(22px, 2.6vw, 32px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  color: #fff;
+}
+
+.portfolio-slider__short {
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: rgba(230, 237, 243, 0.85);
+  max-width: 520px;
+}
+
+.portfolio-slider__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  transition: gap .25s ease;
+}
+.portfolio-slider__slide.is-active:hover .portfolio-slider__cta {
+  gap: 16px;
+}
+.portfolio-slider__arrow {
+  font-size: 18px;
+}
+
+/* ---- Стрелки ---- */
+.portfolio-slider__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(13, 17, 23, 0.7);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(48, 54, 61, 0.9);
+  transition: all .25s ease;
+  z-index: 3;
+  cursor: pointer;
+}
+.portfolio-slider__nav:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-50%) scale(1.1);
+}
+.portfolio-slider__nav--prev { left: 16px; }
+.portfolio-slider__nav--next { right: 16px; }
+
+/* ---- Прогресс-бар ---- */
+.portfolio-slider__progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: rgba(48, 54, 61, 0.7);
+  z-index: 3;
+  overflow: hidden;
+}
+.portfolio-slider__progress-bar {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #ffb060);
+  transform-origin: left;
+  animation: sliderProgress 6s linear;
+}
+@keyframes sliderProgress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* ---- Точки ---- */
+.portfolio-slider__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.portfolio-slider__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(139, 148, 158, 0.35);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+.portfolio-slider__dot:hover {
+  background: rgba(139, 148, 158, 0.7);
+}
+.portfolio-slider__dot.is-active {
+  background: var(--accent);
+  width: 28px;
+  border-radius: 4px;
+  box-shadow: 0 0 12px rgba(255, 90, 31, 0.6);
+}
+
+/* ---- Счётчик ---- */
+.portfolio-slider__counter {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  padding: 8px 14px;
+  background: rgba(13, 17, 23, 0.75);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(48, 54, 61, 0.9);
+  border-radius: 100px;
+  font-size: 13px;
+  color: var(--muted);
+  z-index: 3;
+  font-variant-numeric: tabular-nums;
+}
+.portfolio-slider__counter strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ============================================================
+   Планшет
+   ============================================================ */
+@media (max-width: 900px) {
+  .portfolio-slider__viewport {
+    height: 440px;
+    border-radius: 16px;
+  }
+  .portfolio-slider__info {
+    left: 32px;
+    right: 32px;
+    bottom: 32px;
+  }
+  .portfolio-slider__title {
+    font-size: 22px;
+  }
+  .portfolio-slider__short {
+    font-size: 14px;
+  }
+  .portfolio-slider__nav {
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+  }
+}
+
+/* ============================================================
+   Мобильные
+   ============================================================ */
+@media (max-width: 600px) {
+  .portfolio-slider__viewport {
+    height: 400px;
+    border-radius: 14px;
+  }
+  .portfolio-slider__overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(13, 17, 23, 0.15) 0%,
+      rgba(13, 17, 23, 0.4) 40%,
+      rgba(13, 17, 23, 0.95) 100%
+    );
+  }
+  .portfolio-slider__info {
+    left: 20px;
+    right: 20px;
+    bottom: 24px;
+  }
+  .portfolio-slider__title {
+    font-size: 18px;
+  }
+  .portfolio-slider__short {
+    font-size: 13px;
+  }
+  .portfolio-slider__city {
+    font-size: 10px;
+    padding: 4px 10px;
+  }
+  .portfolio-slider__cta {
+    font-size: 13px;
+  }
+  .portfolio-slider__nav {
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+  .portfolio-slider__nav--prev { left: 8px; }
+  .portfolio-slider__nav--next { right: 8px; }
+  .portfolio-slider__counter {
+    top: 12px;
+    right: 12px;
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}

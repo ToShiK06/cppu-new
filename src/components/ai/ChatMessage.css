@@ -10,3 +10,45 @@
   align-self: flex-start; background: var(--surface-2); color: var(--text);
   border: 1px solid var(--border); border-bottom-left-radius: 4px;
 }
+.msg__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(48, 54, 61, 0.6);
+}
+
+.msg__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all .2s ease;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.msg__btn--primary {
+  background: var(--accent);
+  color: #fff;
+}
+.msg__btn--primary:hover {
+  background: var(--accent-hover);
+  color: #fff;
+}
+
+.msg__btn--ghost {
+  border-color: var(--border);
+  color: var(--text);
+  background: transparent;
+}
+.msg__btn--ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}

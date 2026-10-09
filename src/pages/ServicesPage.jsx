@@ -6,6 +6,7 @@ import Breadcrumbs from "../components/ui/Breadcrumbs";
 import Button from "../components/ui/Button";
 import SparksBackground from "../components/ui/SparksBackground";
 import FlameBackground from "../components/ui/FlameBackground";
+import FaqAccordion from "../components/sections/FaqAccordion";
 import { setMeta, pageMeta } from "../utils/seo";
 import "./ServicesPage.css";
 
@@ -33,7 +34,10 @@ export default function ServicesPage() {
       <div className="container services-page__inner">
         <div className="reveal">
           <Breadcrumbs items={[{ label: "Главная", to: "/" }, { label: "Услуги" }]} />
-          <SectionTitle title="Каталог услуг" subtitle="Все направления работы компании ЦППУ" />
+          <SectionTitle
+            title="Каталог услуг"
+            subtitle="Все направления работы компании ЦППУ"
+          />
         </div>
 
         <div className="services-filter reveal">
@@ -79,7 +83,10 @@ export default function ServicesPage() {
 
         {hasMore && (
           <div className="services-more reveal">
-            <Button variant="ghost" onClick={() => setVisibleCount((v) => v + PAGE_SIZE)}>
+            <Button
+              variant="ghost"
+              onClick={() => setVisibleCount((v) => v + PAGE_SIZE)}
+            >
               Показать ещё {Math.min(PAGE_SIZE, services.length - visibleCount)}
             </Button>
             <span className="services-more__counter">
@@ -87,6 +94,11 @@ export default function ServicesPage() {
             </span>
           </div>
         )}
+
+        {/* FAQ-блок в конце страницы услуг */}
+        <div className="services-page__faq">
+          <FaqAccordion />
+        </div>
       </div>
     </div>
   );

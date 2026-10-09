@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import SectionTitle from "../ui/SectionTitle";
 import Input from "../ui/Input";
 import PhoneInput from "../ui/PhoneInput";
@@ -9,9 +10,30 @@ import { isValidPhone } from "../../utils/phone";
 import "./Contacts.css";
 
 export default function Contacts() {
+  const location = useLocation();
   const [form, setForm] = useState({ name: "", phone: "", message: "" });
   const [status, setStatus] = useState(null);
   const [errors, setErrors] = useState({});
+
+  // Если пользователь пришёл из калькулятора — подставляем данные в сообщение
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const service = params.get("service");
+    const area = params.get("area");
+    const district = params.get("district");
+
+    if (service || area || district) {
+      const parts = [];
+      if (service) parts.push(`Услуга: ${service}`);
+      if (area) parts.push(`Площадь: ${area}`);
+      if (district) parts.push(`Район: ${district}`);
+
+      setForm((f) => ({
+        ...f,
+        message: `Заявка из калькулятора\n${parts.join("\n")}`,
+      }));
+    }
+  }, [location.search]);
 
   const validate = () => {
     const next = {};
@@ -59,7 +81,12 @@ export default function Contacts() {
               <a href={`mailto:${company.email}`}>{company.email}</a>
             </div>
           </div>
-          <form className="contacts__form reveal-right" onSubmit={handleSubmit} noValidate>
+
+          <form
+            className="contacts__form reveal-right"
+            onSubmit={handleSubmit}
+            noValidate
+          >
             <h3>Заказать выезд специалиста</h3>
 
             <div>
@@ -90,7 +117,7 @@ export default function Contacts() {
               <span className="field__label">Сообщение</span>
               <textarea
                 className="input"
-                rows="4"
+                rows="5"
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                 placeholder="Опишите задачу"
@@ -98,7 +125,9 @@ export default function Contacts() {
             </label>
 
             <Button type="submit" block>Отправить заявку</Button>
-            {status === "success" && <p className="form-success">Заявка отправлена.</p>}
+            {status === "success" && (
+              <p className="form-success">Заявка отправлена.</p>
+            )}
             {status === "error" && <p className="form-error">Ошибка отправки.</p>}
           </form>
         </div>

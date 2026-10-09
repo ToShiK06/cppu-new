@@ -1,3 +1,65 @@
+/* Секция портфолио */
+.portfolio-section {
+  position: relative;
+}
+
+/* ============================================================
+   Фильтры
+   ============================================================ */
+.portfolio-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+  padding: 24px;
+  background: rgba(22, 27, 34, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.portfolio-filters__search {
+  width: 100%;
+  max-width: 480px;
+}
+
+.portfolio-filters__row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  align-items: center;
+}
+
+.portfolio-filters__reset {
+  padding: 12px 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .2s ease;
+  white-space: nowrap;
+}
+.portfolio-filters__reset:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.portfolio-filters__result {
+  font-size: 13px;
+  color: var(--muted);
+}
+.portfolio-filters__result strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ============================================================
+   Сетка карточек
+   ============================================================ */
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -13,7 +75,6 @@
   color: inherit;
 }
 
-/* Обложка */
 .portfolio-card__cover {
   position: relative;
   width: 100%;
@@ -33,7 +94,6 @@
   transform: scale(1.06);
 }
 
-/* Затемнение снизу — чтобы текст читался, если обложка светлая */
 .portfolio-card__cover::after {
   content: "";
   position: absolute;
@@ -73,9 +133,47 @@
   align-self: flex-end;
 }
 
-@media (max-width: 720px) {
-  .portfolio-grid {
+/* ============================================================
+   Пустое состояние и «Показать ещё»
+   ============================================================ */
+.portfolio-empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 60px 20px;
+  font-size: 15px;
+  background: rgba(22, 27, 34, 0.5);
+  border: 1px dashed var(--border);
+  border-radius: 16px;
+}
+
+.portfolio-more {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 48px;
+}
+
+.portfolio-more__counter {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.3px;
+}
+
+/* ============================================================
+   Планшет
+   ============================================================ */
+@media (max-width: 900px) {
+  .portfolio-filters {
+    padding: 20px;
+  }
+  .portfolio-filters__row {
     grid-template-columns: 1fr;
+  }
+  .portfolio-filters__search {
+    max-width: 100%;
+  }
+  .portfolio-grid {
     gap: 20px;
   }
   .portfolio-card__body {
@@ -83,5 +181,19 @@
   }
   .portfolio-card__arrow {
     margin: 0 20px 16px;
+  }
+}
+
+/* ============================================================
+   Мобильные
+   ============================================================ */
+@media (max-width: 600px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .portfolio-filters {
+    padding: 16px;
+    border-radius: 12px;
   }
 }

@@ -4,6 +4,7 @@ import Training from "../components/sections/Training";
 import Breadcrumbs from "../components/ui/Breadcrumbs";
 import SparksBackground from "../components/ui/SparksBackground";
 import FlameBackground from "../components/ui/FlameBackground";
+import TrainingSchedule from "../components/sections/TrainingSchedule";
 import { trainingCourse } from "../data/training";
 import { setMeta } from "../utils/seo";
 import "./TrainingPage.css";
@@ -95,6 +96,9 @@ export default function TrainingPage() {
             </ul>
           </div>
         </div>
+
+        {/* Расписание курсов */}
+        <TrainingSchedule />
 
         <h3 className="training-lecturers__title reveal">Лекторы</h3>
         <div className="grid">

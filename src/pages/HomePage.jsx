@@ -4,12 +4,15 @@ import ServicesGrid from "../components/sections/ServicesGrid";
 import Promotions from "../components/sections/Promotions";
 import Training from "../components/sections/Training";
 import Advantages from "../components/sections/Advantages";
-import Portfolio from "../components/sections/Portfolio";
+import PortfolioSlider from "../components/sections/PortfolioSlider";
 import Contacts from "../components/sections/Contacts";
 import SparksBackground from "../components/ui/SparksBackground";
 import { setMeta, pageMeta } from "../utils/seo";
 import FlameBackground from "../components/ui/FlameBackground";
 import CursorTrail from "../components/ui/CursorTrail";
+import FaqAccordion from "../components/sections/FaqAccordion";
+import Calculator from "../components/sections/Calculator";
+import BookingSection from "../components/sections/BookingSection";
 
 export default function HomePage() {
   useEffect(() => setMeta(pageMeta.home), []);
@@ -25,8 +28,11 @@ export default function HomePage() {
         <ServicesGrid limit={12} />
         <Promotions />
         <Training />
+        <Calculator /> 
         <Advantages />
-        <Portfolio limit={3} />
+        <FaqAccordion /> 
+        <BookingSection /> 
+        <PortfolioSlider />
         <Contacts />
       </div>
     </div>
